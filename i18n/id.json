@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "homeTitle": "Chicken LessFille Solo — Menu & Pemesanan",
+    "cartTitle": "Keranjang Pesanan — Chicken LessFille Solo",
+    "description": "Ayam goreng boneless khas Solo dengan saus premium dan paket ramah mahasiswa."
+  },
+  "lang": {
+    "label": "Pilih bahasa",
+    "id": "Bahasa Indonesia",
+    "en": "English"
+  },
+  "nav": {
+    "menu": "Menu",
+    "about": "Profil",
+    "branches": "Cabang",
+    "contact": "Kontak",
+    "cart": "Keranjang",
+    "backToMenu": "Kembali ke Menu"
+  },
+  "hero": {
+    "eyebrow": "Solo Raya · Ayam Goreng Boneless",
+    "ctaMenu": "Lihat Menu",
+    "ctaBranches": "Lokasi Cabang",
+    "ctaCart": "Buka Keranjang",
+    "imageAlt": "Sajian ayam goreng boneless renyah Chicken LessFille Solo dengan saus premium, bayam goreng, telur orak-arik, nasi putih, burger ayam, dan es teh"
+  },
+  "menu": {
+    "sectionEyebrow": "Daftar Menu",
+    "sectionTitle": "Pilih Menu Favoritmu",
+    "searchPlaceholder": "Cari menu, saus, atau kode...",
+    "searchLabel": "Cari menu",
+    "allCategories": "Semua",
+    "variantLabel": "Varian",
+    "codePrefix": "Kode",
+    "upgradeToggle": "Upgrade Paket (+Rp 4.000)",
+    "upgradeShort": "Paket (+4K)",
+    "addToCart": "Tambah",
+    "added": "Ditambahkan",
+    "emptySearch": "Menu yang kamu cari tidak ditemukan.",
+    "resetFilter": "Tampilkan semua menu",
+    "itemCount": "{count} menu",
+    "loading": "Memuat menu dari sumber data...",
+    "error": "Gagal memuat data menu. Pastikan berkas sumber tersedia."
+  },
+  "business": {
+    "sectionEyebrow": "Tentang Kami",
+    "sectionTitle": "Profil & Pengalaman Makan",
+    "historyTitle": "Profil Singkat & Sejarah",
+    "packagesTitle": "Pilihan Paket",
+    "saucesTitle": "Varian Saus",
+    "experienceTitle": "Pengalaman Makan",
+    "notesTitle": "Catatan Tambahan",
+    "summaryTitle": "Rangkuman",
+    "startingFrom": "Harga"
+  },
+  "branches": {
+    "sectionEyebrow": "Cabang Resmi",
+    "sectionTitle": "Lokasi Outlet di Solo Raya",
+    "branchLabel": "Cabang {num}",
+    "openMap": "Buka di Google Maps"
+  },
+  "contact": {
+    "sectionEyebrow": "Kontak & Media Sosial",
+    "sectionTitle": "Terhubung dengan LessFille",
+    "whatsapp": "WhatsApp Admin / Cabang",
+    "email": "Email",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "linktree": "Link Info Lengkap",
+    "chatWa": "Chat WhatsApp"
+  },
+  "floatingCart": {
+    "items": "{count} item",
+    "viewCart": "Lihat Keranjang"
+  },
+  "cart": {
+    "eyebrow": "Ringkasan Pesanan",
+    "title": "Keranjang Belanja",
+    "subtitle": "Periksa pesananmu, pilih cabang tujuan, lalu kirim pesanan ke WhatsApp.",
+    "itemsTitle": "Daftar Pesanan",
+    "clearCart": "Kosongkan",
+    "emptyTitle": "Keranjang masih kosong",
+    "emptyText": "Belum ada menu yang dipilih. Yuk pilih menu ayam boneless favoritmu dulu.",
+    "browseMenu": "Lihat Daftar Menu",
+    "itemNotePlaceholder": "Catatan item (opsional, mis. saus dipisah)",
+    "removeItem": "Hapus",
+    "subtotal": "Subtotal",
+    "totalItems": "Total Item",
+    "total": "Total Bayar",
+    "checkoutTitle": "Detail Pemesanan",
+    "branchLabel": "Pilih Cabang",
+    "branchPlaceholder": "-- Pilih cabang tujuan --",
+    "nameLabel": "Nama Pemesan",
+    "namePlaceholder": "Masukkan nama kamu",
+    "orderTypeLabel": "Tipe Pesanan",
+    "dineIn": "Makan di Tempat (Dine-in)",
+    "takeAway": "Bawa Pulang (Take-away)",
+    "paymentLabel": "Pembayaran",
+    "paymentCash": "Tunai (Cash)",
+    "paymentEmoney": "E-Money / Non-Tunai",
+    "orderNotesLabel": "Catatan Tambahan",
+    "orderNotesPlaceholder": "Catatan umum untuk kasir/cabang (opsional)",
+    "sendWhatsApp": "Pesan via WhatsApp",
+    "copySummary": "Salin Ringkasan",
+    "copied": "Ringkasan disalin!",
+    "validationBranch": "Silakan pilih cabang tujuan terlebih dahulu.",
+    "validationName": "Silakan isi nama pemesan terlebih dahulu.",
+    "paymentNote": "Pembayaran langsung di kasir/meja (cash & e-money).",
+    "waGreeting": "Halo Chicken LessFille Solo, saya ingin memesan:",
+    "waBranch": "Cabang",
+    "waCustomer": "Nama",
+    "waOrderType": "Tipe",
+    "waPayment": "Pembayaran",
+    "waItems": "Pesanan",
+    "waItemNote": "Catatan",
+    "waTotal": "Total",
+    "waGeneralNote": "Catatan Tambahan"
+  },
+  "footer": {
+    "rights": "Informasi dan menu dimuat langsung dari berkas resmi bisnis."
+  },
+  "content": {}
+}
