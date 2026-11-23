@@ -14,47 +14,48 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body class="bg-background text-ink antialiased">
-    <header class="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-sm shadow-[0_1px_3px_rgba(18,20,22,0.06)]">
-      <div class="ui-container flex flex-wrap md:flex-nowrap items-center justify-between gap-x-3 gap-y-2 py-2.5 md:min-h-[64px] md:py-2">
-        <div class="order-1 flex min-w-0 items-center gap-2 sm:gap-3">
+    <header class="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-md shadow-[0_1px_3px_rgba(18,20,22,0.06)]">
+      <div class="ui-container flex flex-col gap-2.5 py-2.5 md:min-h-[72px] md:flex-row md:items-center md:justify-between md:gap-4 md:py-2">
+        <div class="flex min-w-0 items-center justify-between gap-2">
           <a
             href="../"
-            class="inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-xs sm:text-sm font-bold text-ink transition-colors hover:border-primary hover:text-primary"
+            class="inline-flex min-h-[48px] min-w-0 items-center gap-1.5 sm:gap-2 text-sm sm:text-base lg:text-lg font-extrabold tracking-tight text-ink"
+          >
+            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+            <span id="brand-name-header" class="leading-tight"></span>
+          </a>
+
+          <a
+            href="../"
+            class="inline-flex min-h-[48px] shrink-0 items-center gap-1.5 rounded-full border border-border bg-background px-3 sm:px-4 py-2 text-xs sm:text-sm font-extrabold text-ink transition-colors hover:border-primary hover:text-primary"
           >
             <span aria-hidden="true">&larr;</span>
             <span data-i18n="nav.backToMenu"></span>
-          </a>
-          <a
-            href="../"
-            class="inline-flex min-w-0 items-center gap-2 text-sm sm:text-base font-extrabold tracking-tight text-ink"
-          >
-            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
-            <span id="brand-name-header" class="truncate"></span>
           </a>
         </div>
 
         <div
           id="lang-toggle"
-          class="ui-lang-switch order-2 w-full md:w-auto"
+          class="ui-lang-switch w-full md:w-auto"
         ></div>
       </div>
     </header>
 
-    <main class="py-6 sm:py-8 pb-16">
+    <main class="py-7 sm:py-10 pb-20">
       <div class="ui-container">
-        <div class="mb-5">
+        <div class="mb-6">
           <p class="mb-1 text-xs font-extrabold uppercase tracking-wider text-primary" data-i18n="cart.eyebrow"></p>
-          <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-ink" data-i18n="cart.title"></h1>
-          <p class="mt-1 text-sm text-ink-secondary" data-i18n="cart.subtitle"></p>
+          <h1 class="text-[clamp(1.45rem,4vw,2.2rem)] font-extrabold tracking-tight text-ink text-balance" data-i18n="cart.title"></h1>
+          <p class="mt-1.5 text-[15px] sm:text-base leading-relaxed text-ink-secondary max-w-[60ch]" data-i18n="cart.subtitle"></p>
         </div>
 
         <div
           id="cart-root"
-          class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.95fr)]"
+          class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.95fr)] lg:gap-6"
           aria-live="polite"
         >
           <section class="ui-card p-4 sm:p-6">
-            <div class="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-3">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-2.5 border-b border-border-subtle pb-3.5">
               <h2 class="text-base sm:text-lg font-extrabold text-ink" data-i18n="cart.itemsTitle"></h2>
               <button
                 id="clear-cart-btn"
@@ -67,13 +68,14 @@
             <div id="cart-items-container"></div>
           </section>
 
-          <aside id="checkout-card" class="ui-card p-4 sm:p-6 lg:sticky lg:top-20">
+          <aside id="checkout-card" class="ui-card p-4 sm:p-6 lg:sticky lg:top-24">
             <h2 class="mb-4 text-base sm:text-lg font-extrabold text-ink" data-i18n="cart.checkoutTitle"></h2>
 
             <form id="checkout-form" class="space-y-4" novalidate>
               <div class="space-y-1.5">
                 <label for="branch-select" class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.branchLabel"></label>
                 <select id="branch-select" class="ui-select" required></select>
+                <p id="branch-address-preview" class="rounded-lg bg-surface-muted border border-border-subtle px-3 py-2 text-xs leading-relaxed text-ink-secondary" hidden></p>
               </div>
 
               <div class="space-y-1.5">
@@ -88,9 +90,9 @@
                 />
               </div>
 
-              <div class="space-y-1.5">
+              <div class="space-y-2">
                 <span class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.orderTypeLabel"></span>
-                <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                   <label class="ui-radio-card">
                     <input type="radio" name="orderType" value="dineIn" checked />
                     <span class="leading-snug" data-i18n="cart.dineIn"></span>
@@ -102,9 +104,9 @@
                 </div>
               </div>
 
-              <div class="space-y-1.5">
+              <div class="space-y-2">
                 <span class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.paymentLabel"></span>
-                <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                   <label class="ui-radio-card">
                     <input type="radio" name="paymentMethod" value="paymentCash" checked />
                     <span class="leading-snug" data-i18n="cart.paymentCash"></span>
@@ -126,7 +128,7 @@
                 ></textarea>
               </div>
 
-              <div class="space-y-2 border-y border-border-subtle py-3.5 text-sm">
+              <div class="space-y-2.5 border-y border-border-subtle py-4 text-sm">
                 <div class="flex items-center justify-between text-ink-secondary">
                   <span data-i18n="cart.totalItems"></span>
                   <strong id="summary-count" class="font-bold text-ink tabular-nums">0</strong>
@@ -141,19 +143,19 @@
                 </div>
               </div>
 
-              <p id="form-feedback" class="rounded-lg border px-3 py-2.5 text-xs sm:text-sm font-semibold" hidden></p>
+              <p id="form-feedback" class="rounded-xl border px-3.5 py-3 text-xs sm:text-sm font-semibold" hidden></p>
 
-              <div class="flex flex-col gap-2.5">
+              <div class="flex flex-col gap-3">
                 <button
                   id="whatsapp-submit-btn"
                   type="submit"
-                  class="ui-btn ui-btn-primary w-full min-h-[48px] text-sm sm:text-base"
+                  class="ui-btn ui-btn-primary w-full min-h-[52px] text-sm sm:text-base"
                   data-i18n="cart.sendWhatsApp"
                 ></button>
                 <button
                   id="copy-summary-btn"
                   type="button"
-                  class="ui-btn ui-btn-outline w-full"
+                  class="ui-btn ui-btn-outline w-full min-h-[48px]"
                   data-i18n="cart.copySummary"
                 ></button>
               </div>
@@ -165,8 +167,8 @@
       </div>
     </main>
 
-    <footer class="mt-6 border-t border-border bg-surface py-6">
-      <div class="ui-container flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-ink-muted">
+    <footer class="mt-8 border-t border-border bg-surface py-7">
+      <div class="ui-container flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-ink-muted">
         <strong id="brand-name-footer" class="text-ink"></strong>
         <span data-i18n="footer.rights"></span>
       </div>

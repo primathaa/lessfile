@@ -85,9 +85,9 @@ function renderHeroAndHighlights() {
   }
 
   highlightEntries.slice(0, 3).forEach((entry) => {
-    const card = el("div", "ui-card p-3.5 sm:p-4");
-    card.appendChild(el("div", "mb-1 text-[11px] font-extrabold uppercase tracking-wider text-primary", entry.label));
-    card.appendChild(el("div", "text-sm font-bold text-ink leading-snug", entry.value));
+    const card = el("div", "ui-card p-4 sm:p-5");
+    card.appendChild(el("div", "mb-1 text-xs font-extrabold uppercase tracking-wider text-primary", entry.label));
+    card.appendChild(el("div", "text-sm sm:text-base font-extrabold text-ink leading-snug", entry.value));
     strip.appendChild(card);
   });
 }
@@ -130,36 +130,56 @@ function createMenuCard(cat, item) {
 
   const card = el(
     "article",
-    "ui-card group overflow-hidden grid grid-cols-[100px_minmax(0,1fr)] sm:flex sm:flex-col transition-shadow hover:shadow-[0_6px_20px_rgba(18,20,22,0.08)]"
+    "ui-card group overflow-hidden flex flex-col transition-shadow hover:shadow-[0_8px_24px_rgba(18,20,22,0.09)]"
   );
 
-  const media = el("div", "relative h-full min-h-[112px] sm:h-auto sm:aspect-square w-full bg-[#141517] overflow-hidden");
-  const img = el("img", "menu-img h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]");
+  // Top zone: horizontal media + title on mobile (<640px), stacked full-bleed square image on sm+
+  const topZone = el("div", "flex items-start gap-3.5 p-3.5 pb-2.5 sm:p-0 sm:block");
+
+  const media = el(
+    "div",
+    "relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-[#141517] sm:h-auto sm:w-full sm:aspect-square sm:rounded-none"
+  );
+  const img = el(
+    "img",
+    "menu-img h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+  );
   img.loading = "lazy";
   img.alt = `${i18n.tx(item.name)} — ${i18n.tx(variant.variant_name)}`;
   bindMenuImage(img, variant.menu_code, BASE_PATH, state.data.mode);
   media.appendChild(img);
   media.appendChild(
-    el("span", "absolute top-2 left-2 rounded-full bg-dark-canvas/80 px-2 py-0.5 text-[10px] font-bold tracking-wide text-white", `#${variant.menu_code}`)
+    el(
+      "span",
+      "absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 rounded-full bg-dark-canvas/85 px-2 py-0.5 text-[10px] sm:text-[11px] font-extrabold tracking-wide text-white",
+      `#${variant.menu_code}`
+    )
   );
-  card.appendChild(media);
+  topZone.appendChild(media);
 
-  const body = el("div", "flex min-w-0 flex-1 flex-col gap-2.5 p-3 sm:p-4");
-  const titleRow = el("div", "flex flex-col gap-1");
+  const titleRow = el("div", "flex min-w-0 flex-1 flex-col gap-1 pt-0.5 sm:p-4 sm:pb-0");
   if (item.group_label) {
-    titleRow.appendChild(el("span", "text-[11px] font-extrabold uppercase tracking-wider text-primary", i18n.tx(item.group_label)));
+    titleRow.appendChild(
+      el("span", "text-[11px] font-extrabold uppercase tracking-wider text-primary", i18n.tx(item.group_label))
+    );
   }
-  titleRow.appendChild(el("h3", "text-sm sm:text-base font-extrabold leading-snug text-ink break-words", i18n.tx(item.name)));
+  titleRow.appendChild(
+    el("h3", "text-[15px] sm:text-base font-extrabold leading-snug text-ink break-words", i18n.tx(item.name))
+  );
   if (item.flavor_note) {
-    titleRow.appendChild(el("p", "text-xs text-ink-muted leading-snug", i18n.tx(item.flavor_note)));
+    titleRow.appendChild(el("p", "text-xs sm:text-sm text-ink-secondary leading-relaxed", i18n.tx(item.flavor_note)));
   }
   if (item.availability_note) {
-    titleRow.appendChild(el("span", "ui-badge ui-badge-muted mt-0.5 w-fit", i18n.tx(item.availability_note)));
+    titleRow.appendChild(el("span", "ui-badge ui-badge-muted mt-1 w-fit", i18n.tx(item.availability_note)));
   }
-  body.appendChild(titleRow);
+  topZone.appendChild(titleRow);
+  card.appendChild(topZone);
+
+  // Bottom zone: full card width on mobile & desktop so touch controls never feel cramped
+  const controlsZone = el("div", "flex flex-1 flex-col gap-2.5 px-3.5 pb-3.5 pt-1 sm:px-4 sm:pb-4 sm:pt-3");
 
   if (item.variants.length > 1) {
-    const vRow = el("div", "flex flex-wrap gap-1.5");
+    const vRow = el("div", "grid grid-cols-2 gap-2");
     item.variants.forEach((v, idx) => {
       const vBtn = el(
         "button",
@@ -174,29 +194,34 @@ function createMenuCard(cat, item) {
       });
       vRow.appendChild(vBtn);
     });
-    body.appendChild(vRow);
+    controlsZone.appendChild(vRow);
   }
 
   if (cat.upgrade) {
     const upgradeLabel = el(
       "label",
-      "flex min-h-[38px] items-center gap-2 rounded-lg border border-dashed border-border bg-surface-muted px-2.5 py-1.5 text-xs font-semibold text-ink-secondary cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary-soft has-[:checked]:text-primary"
+      "flex min-h-[48px] items-center gap-2.5 rounded-xl border border-dashed border-border bg-surface-muted px-3 py-2 text-xs sm:text-sm font-bold text-ink-secondary cursor-pointer transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary-soft has-[:checked]:text-primary"
     );
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.className = "h-4 w-4 shrink-0 accent-primary";
+    checkbox.className = "h-5 w-5 shrink-0 accent-primary";
     checkbox.checked = sel.upgradeCombo;
     checkbox.addEventListener("change", () => {
       sel.upgradeCombo = checkbox.checked;
       renderMenu();
     });
     upgradeLabel.appendChild(checkbox);
-    upgradeLabel.appendChild(el("span", "leading-tight", i18n.t("menu.upgradeToggle")));
-    body.appendChild(upgradeLabel);
+    upgradeLabel.appendChild(el("span", "leading-snug", i18n.t("menu.upgradeToggle")));
+    controlsZone.appendChild(upgradeLabel);
   }
 
-  const footer = el("div", "mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-border-subtle pt-2.5");
-  footer.appendChild(el("span", "text-sm sm:text-base font-extrabold text-ink whitespace-nowrap tabular-nums", i18n.formatIDR(activePrice)));
+  const footer = el(
+    "div",
+    "mt-auto flex items-center justify-between gap-3 border-t border-border-subtle pt-3"
+  );
+  footer.appendChild(
+    el("span", "text-base sm:text-lg font-extrabold text-ink whitespace-nowrap tabular-nums", i18n.formatIDR(activePrice))
+  );
 
   if (qty > 0) {
     const stepper = el("div", "ui-stepper");
@@ -215,7 +240,7 @@ function createMenuCard(cat, item) {
     stepper.append(decBtn, val, incBtn);
     footer.appendChild(stepper);
   } else {
-    const addBtn = el("button", "ui-btn-sm ui-btn-primary", `+ ${i18n.t("menu.addToCart")}`);
+    const addBtn = el("button", "ui-btn-sm ui-btn-primary px-5", `+ ${i18n.t("menu.addToCart")}`);
     addBtn.type = "button";
     addBtn.addEventListener("click", () => {
       cart.addItem({
@@ -230,8 +255,8 @@ function createMenuCard(cat, item) {
     footer.appendChild(addBtn);
   }
 
-  body.appendChild(footer);
-  card.appendChild(body);
+  controlsZone.appendChild(footer);
+  card.appendChild(controlsZone);
   return card;
 }
 
@@ -268,37 +293,45 @@ function renderMenu() {
     if (filteredItems.length === 0) return;
     matchedCategories += 1;
 
-    const block = el("div", "mb-8 last:mb-0");
-    const head = el("div", "mb-2.5 flex flex-wrap items-center gap-2");
-    head.appendChild(el("h3", "text-base sm:text-lg font-extrabold tracking-tight text-ink", i18n.tx(cat.name)));
+    const block = el("div", "mb-10 last:mb-0");
+    const head = el("div", "mb-3 flex flex-wrap items-center gap-2.5");
+    head.appendChild(el("h3", "text-lg sm:text-xl font-extrabold tracking-tight text-ink", i18n.tx(cat.name)));
     if (cat.badge) {
       head.appendChild(el("span", "ui-badge ui-badge-primary", i18n.tx(cat.badge)));
     }
     head.appendChild(
-      el("span", "ml-auto text-xs font-semibold text-ink-muted", i18n.t("menu.itemCount", { count: filteredItems.length }))
+      el("span", "ml-auto text-xs sm:text-sm font-bold text-ink-muted", i18n.t("menu.itemCount", { count: filteredItems.length }))
     );
     block.appendChild(head);
 
     if (cat.description) {
       block.appendChild(
-        el("p", "mb-3.5 rounded-lg border-l-4 border-primary bg-surface px-3.5 py-2.5 text-xs sm:text-sm leading-relaxed text-ink-secondary shadow-[0_1px_2px_rgba(18,20,22,0.04)]", i18n.tx(cat.description))
+        el(
+          "p",
+          "mb-4 rounded-xl border-l-4 border-primary bg-surface px-4 py-3 text-xs sm:text-sm leading-relaxed text-ink-secondary shadow-[0_1px_2px_rgba(18,20,22,0.04)]",
+          i18n.tx(cat.description)
+        )
       );
     }
     if (cat.upgrade && cat.upgrade.description) {
       block.appendChild(
-        el("p", "mb-3.5 rounded-lg border-l-4 border-primary bg-surface px-3.5 py-2.5 text-xs sm:text-sm leading-relaxed text-ink-secondary shadow-[0_1px_2px_rgba(18,20,22,0.04)]", i18n.tx(cat.upgrade.description))
+        el(
+          "p",
+          "mb-4 rounded-xl border-l-4 border-primary bg-surface px-4 py-3 text-xs sm:text-sm leading-relaxed text-ink-secondary shadow-[0_1px_2px_rgba(18,20,22,0.04)]",
+          i18n.tx(cat.upgrade.description)
+        )
       );
     }
 
-    const grid = el("div", "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-4");
+    const grid = el("div", "grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-4");
     filteredItems.forEach((item) => grid.appendChild(createMenuCard(cat, item)));
     block.appendChild(grid);
     container.appendChild(block);
   });
 
   if (matchedCategories === 0) {
-    const empty = el("div", "ui-card flex flex-col items-center gap-3 p-8 text-center");
-    empty.appendChild(el("p", "text-sm text-ink-secondary", i18n.t("menu.emptySearch")));
+    const empty = el("div", "ui-card flex flex-col items-center gap-3.5 p-8 text-center");
+    empty.appendChild(el("p", "text-sm sm:text-base text-ink-secondary", i18n.t("menu.emptySearch")));
     const resetBtn = el("button", "ui-btn ui-btn-outline", i18n.t("menu.resetFilter"));
     resetBtn.type = "button";
     resetBtn.addEventListener("click", () => {
@@ -321,20 +354,20 @@ function renderBusinessSection() {
   container.innerHTML = "";
 
   const historyCard = el("article", "ui-card p-5 sm:p-6 lg:col-span-7");
-  historyCard.appendChild(el("h3", "mb-2 text-base sm:text-lg font-extrabold text-ink", i18n.t("business.historyTitle")));
-  historyCard.appendChild(el("p", "text-sm leading-relaxed text-ink-secondary", i18n.tx(business.profile_history)));
+  historyCard.appendChild(el("h3", "mb-2.5 text-base sm:text-lg font-extrabold text-ink", i18n.t("business.historyTitle")));
+  historyCard.appendChild(el("p", "text-[15px] sm:text-base leading-relaxed text-ink-secondary", i18n.tx(business.profile_history)));
 
   if (business.packages.length > 0) {
-    const pkgWrap = el("div", "mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2");
+    const pkgWrap = el("div", "mt-5 grid grid-cols-1 gap-3.5 sm:grid-cols-2");
     business.packages.forEach((pkg) => {
-      const box = el("div", "rounded-lg border border-border bg-surface-muted p-4");
-      const head = el("div", "mb-2.5 flex flex-wrap items-baseline justify-between gap-2");
-      head.appendChild(el("h4", "text-sm sm:text-base font-extrabold text-ink", i18n.tx(pkg.name)));
+      const box = el("div", "rounded-xl border border-border bg-surface-muted p-4");
+      const head = el("div", "mb-3 flex flex-wrap items-baseline justify-between gap-2");
+      head.appendChild(el("h4", "text-base font-extrabold text-ink", i18n.tx(pkg.name)));
       if (pkg.starting_price_note) {
         head.appendChild(el("span", "ui-badge ui-badge-soft", i18n.tx(pkg.starting_price_note)));
       }
       box.appendChild(head);
-      const list = el("ul", "list-disc space-y-1.5 pl-4 text-xs sm:text-sm text-ink-secondary");
+      const list = el("ul", "list-disc space-y-2 pl-4 text-sm leading-relaxed text-ink-secondary");
       pkg.features.forEach((feat) => list.appendChild(el("li", "", i18n.tx(feat))));
       box.appendChild(list);
       pkgWrap.appendChild(box);
@@ -344,18 +377,20 @@ function renderBusinessSection() {
   container.appendChild(historyCard);
 
   const expCard = el("article", "ui-card p-5 sm:p-6 lg:col-span-5");
-  expCard.appendChild(el("h3", "mb-2.5 text-base sm:text-lg font-extrabold text-ink", i18n.t("business.experienceTitle")));
-  const expList = el("ul", "list-disc space-y-2 pl-4 text-sm text-ink-secondary");
+  expCard.appendChild(el("h3", "mb-3 text-base sm:text-lg font-extrabold text-ink", i18n.t("business.experienceTitle")));
+  const expList = el("ul", "list-disc space-y-2.5 pl-4 text-[15px] sm:text-sm leading-relaxed text-ink-secondary");
   business.dining_experience.forEach((line) => expList.appendChild(el("li", "", i18n.tx(line))));
   expCard.appendChild(expList);
 
   if (business.sauces.length > 0) {
     expCard.appendChild(
-      el("h3", "mt-5 mb-2.5 text-base font-extrabold text-ink", i18n.tx(business.sauces_note) || i18n.t("business.saucesTitle"))
+      el("h3", "mt-6 mb-3 text-base font-extrabold text-ink", i18n.tx(business.sauces_note) || i18n.t("business.saucesTitle"))
     );
     const pills = el("div", "flex flex-wrap gap-2");
     business.sauces.forEach((s) =>
-      pills.appendChild(el("span", "rounded-full border border-border bg-background px-3 py-1 text-xs font-bold text-ink", i18n.tx(s)))
+      pills.appendChild(
+        el("span", "rounded-full border border-border bg-background px-3.5 py-1.5 text-xs sm:text-sm font-bold text-ink", i18n.tx(s))
+      )
     );
     expCard.appendChild(pills);
   }
@@ -363,17 +398,17 @@ function renderBusinessSection() {
 
   if (business.additional_notes.length > 0) {
     const notesCard = el("article", "ui-card p-5 sm:p-6 lg:col-span-6");
-    notesCard.appendChild(el("h3", "mb-2.5 text-base sm:text-lg font-extrabold text-ink", i18n.t("business.notesTitle")));
-    const notesList = el("ul", "list-disc space-y-2 pl-4 text-sm text-ink-secondary");
+    notesCard.appendChild(el("h3", "mb-3 text-base sm:text-lg font-extrabold text-ink", i18n.t("business.notesTitle")));
+    const notesList = el("ul", "list-disc space-y-2.5 pl-4 text-[15px] sm:text-sm leading-relaxed text-ink-secondary");
     business.additional_notes.forEach((note) => notesList.appendChild(el("li", "", i18n.tx(note))));
     notesCard.appendChild(notesList);
     container.appendChild(notesCard);
   }
 
   if (business.summary) {
-    const sumCard = el("article", "rounded-xl bg-dark-canvas p-5 sm:p-6 text-white lg:col-span-6");
-    sumCard.appendChild(el("h3", "mb-2 text-base sm:text-lg font-extrabold text-white", i18n.t("business.summaryTitle")));
-    sumCard.appendChild(el("p", "text-sm leading-relaxed text-[#DDE4E2]", i18n.tx(business.summary)));
+    const sumCard = el("article", "rounded-2xl bg-dark-canvas p-5 sm:p-6 text-white lg:col-span-6");
+    sumCard.appendChild(el("h3", "mb-2.5 text-base sm:text-lg font-extrabold text-white", i18n.t("business.summaryTitle")));
+    sumCard.appendChild(el("p", "text-[15px] sm:text-sm leading-relaxed text-[#DDE4E2]", i18n.tx(business.summary)));
     container.appendChild(sumCard);
   }
 }
@@ -384,14 +419,14 @@ function renderBranches() {
   container.innerHTML = "";
 
   state.data.branches.forEach((branch) => {
-    const card = el("article", "ui-card flex flex-col gap-2.5 p-5");
+    const card = el("article", "ui-card flex flex-col gap-3 p-5 sm:p-6");
     card.appendChild(
       el("span", "ui-badge ui-badge-soft w-fit", i18n.t("branches.branchLabel", { num: branch.branch_number }))
     );
-    card.appendChild(el("h3", "text-base font-extrabold text-ink", branch.name));
-    card.appendChild(el("p", "flex-1 text-sm leading-relaxed text-ink-secondary", branch.address));
+    card.appendChild(el("h3", "text-base sm:text-lg font-extrabold text-ink", branch.name));
+    card.appendChild(el("p", "flex-1 text-[15px] sm:text-sm leading-relaxed text-ink-secondary", branch.address));
 
-    const mapLink = el("a", "ui-btn ui-btn-outline mt-1 w-full sm:w-fit text-xs sm:text-sm", i18n.t("branches.openMap"));
+    const mapLink = el("a", "ui-btn ui-btn-outline mt-1 w-full sm:w-fit text-sm", i18n.t("branches.openMap"));
     mapLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       `${branch.name} ${branch.address}`
     )}`;
@@ -454,15 +489,15 @@ function renderContact() {
   items.forEach((item) => {
     const link = el(
       "a",
-      "ui-card flex min-h-[72px] flex-col justify-center gap-1 p-4 transition-all hover:border-primary hover:-translate-y-0.5"
+      "ui-card flex min-h-[76px] flex-col justify-center gap-1 p-4 sm:p-5 transition-colors hover:border-primary"
     );
     link.href = item.href;
     if (item.href.startsWith("http")) {
       link.target = "_blank";
       link.rel = "noopener noreferrer";
     }
-    link.appendChild(el("span", "text-[11px] font-extrabold uppercase tracking-wider text-ink-muted", item.label));
-    link.appendChild(el("span", "text-sm font-bold text-ink break-words", item.value));
+    link.appendChild(el("span", "text-xs font-extrabold uppercase tracking-wider text-ink-muted", item.label));
+    link.appendChild(el("span", "text-sm sm:text-base font-extrabold text-ink break-words", item.value));
     container.appendChild(link);
   });
 }
@@ -505,7 +540,7 @@ async function boot() {
     const container = document.getElementById("menu-container");
     if (container) {
       container.innerHTML = "";
-      container.appendChild(el("div", "ui-card p-7 text-center text-sm text-ink-secondary", i18n.t("menu.error")));
+      container.appendChild(el("div", "ui-card p-8 text-center text-sm sm:text-base text-ink-secondary", i18n.t("menu.error")));
     }
     console.error(err);
   }

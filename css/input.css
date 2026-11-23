@@ -10,12 +10,12 @@
   --color-primary-border: #FFC4C4;
   --color-background: #EBEFEE;
   --color-surface: #FFFFFF;
-  --color-surface-muted: #F4F7F6;
+  --color-surface-muted: #F5F8F7;
   --color-ink: #16181A;
-  --color-ink-secondary: #485055;
-  --color-ink-muted: #687177;
-  --color-border: #D4DCDA;
-  --color-border-subtle: #E4EAE8;
+  --color-ink-secondary: #434B50;
+  --color-ink-muted: #5F686E;
+  --color-border: #D2DBD8;
+  --color-border-subtle: #E3EAE8;
   --color-dark-canvas: #121416;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -28,15 +28,15 @@
   --card-foreground: #16181A;
   --primary: #FF2C2C;
   --primary-foreground: #FFFFFF;
-  --secondary: #F4F7F6;
+  --secondary: #F5F8F7;
   --secondary-foreground: #16181A;
-  --muted: #E4EAE8;
-  --muted-foreground: #5B646A;
+  --muted: #E3EAE8;
+  --muted-foreground: #5F686E;
   --accent: #FFF1F1;
   --accent-foreground: #D61F1F;
-  --border: #D4DCDA;
+  --border: #D2DBD8;
   --ring: #FF2C2C;
-  --radius: 0.75rem;
+  --radius: 0.875rem;
 }
 
 @layer base {
@@ -52,17 +52,28 @@
     font-family: var(--font-sans);
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Ensure anchored sections never hide beneath the sticky header */
   section[id] {
-    scroll-margin-top: 7.25rem;
+    scroll-margin-top: 8.5rem;
   }
 
   @media (min-width: 768px) {
     section[id] {
-      scroll-margin-top: 5rem;
+      scroll-margin-top: 5.5rem;
     }
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  label {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   button:focus-visible,
@@ -75,26 +86,26 @@
   }
 }
 
-/* Adapted shadcn/ui component primitives */
+/* Adapted shadcn/ui component primitives with >=48px mobile touch targets */
 @layer components {
   .ui-container {
-    @apply mx-auto w-full max-w-[1200px] px-3 sm:px-5 lg:px-6;
+    @apply mx-auto w-full max-w-[1200px] px-3.5 sm:px-6 lg:px-8;
   }
 
   .ui-card {
-    @apply rounded-xl border border-border bg-surface text-ink shadow-[0_1px_3px_rgba(18,20,22,0.06)];
+    @apply rounded-2xl border border-border bg-surface text-ink shadow-[0_1px_3px_rgba(18,20,22,0.05),0_4px_12px_rgba(18,20,22,0.03)];
   }
 
   .ui-btn {
-    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-transparent px-4 py-2.5 text-sm font-bold transition-colors duration-150 cursor-pointer select-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-transparent px-5 py-2.5 text-sm font-bold leading-snug transition-colors duration-150 cursor-pointer select-none active:opacity-90 disabled:pointer-events-none disabled:opacity-45;
   }
 
   .ui-btn-sm {
-    @apply inline-flex min-h-[38px] items-center justify-center gap-1.5 rounded-full border border-transparent px-3.5 py-2 text-xs font-bold transition-colors duration-150 cursor-pointer select-none active:scale-[0.98];
+    @apply inline-flex min-h-[48px] sm:min-h-[44px] items-center justify-center gap-1.5 rounded-full border border-transparent px-4 py-2 text-sm sm:text-xs font-extrabold leading-none transition-colors duration-150 cursor-pointer select-none active:opacity-90;
   }
 
   .ui-btn-primary {
-    @apply bg-primary text-white hover:bg-primary-hover;
+    @apply bg-primary text-white hover:bg-primary-hover shadow-[0_2px_6px_rgba(255,44,44,0.22)];
   }
 
   .ui-btn-outline {
@@ -106,11 +117,11 @@
   }
 
   .ui-btn-ghost-danger {
-    @apply min-h-[38px] border-primary-border bg-transparent px-3.5 py-1.5 text-xs font-bold text-primary hover:bg-primary-soft;
+    @apply min-h-[48px] sm:min-h-[44px] border-primary-border bg-primary-soft/50 px-4 py-2 text-xs sm:text-sm font-bold text-primary hover:bg-primary-soft;
   }
 
   .ui-badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-extrabold tracking-wide;
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-extrabold tracking-wide leading-none;
   }
 
   .ui-badge-primary {
@@ -118,78 +129,78 @@
   }
 
   .ui-badge-soft {
-    @apply bg-primary-soft text-primary;
+    @apply bg-primary-soft text-primary border border-primary-border/60;
   }
 
   .ui-badge-muted {
-    @apply bg-background text-ink-secondary;
+    @apply bg-background text-ink-secondary border border-border;
   }
 
+  /* 16px (text-base) on mobile prevents iOS Safari/Chrome mobile auto-zoom on focus */
   .ui-input,
   .ui-select,
   .ui-textarea {
-    @apply w-full rounded-lg border border-border bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-muted transition-colors focus:border-primary focus:outline-none;
+    @apply w-full max-w-full min-w-0 rounded-xl border border-border bg-surface px-4 py-3 text-base sm:text-sm text-ink placeholder:text-ink-muted transition-colors focus:border-primary focus:outline-none;
   }
 
   .ui-input,
   .ui-select {
-    @apply min-h-[44px];
+    @apply min-h-[48px];
   }
 
-  /* Segmented language switcher (adapted shadcn TabsList/TabsTrigger) */
+  /* Segmented language switcher (>=48px touch height, >=8px gap between options) */
   .ui-lang-switch {
-    @apply inline-flex items-center rounded-full border border-border bg-background p-1 gap-1;
+    @apply inline-flex min-h-[52px] items-center rounded-full border border-border bg-background p-1 gap-2;
   }
 
   .ui-lang-btn {
-    @apply inline-flex min-h-[36px] flex-1 sm:flex-initial items-center justify-center rounded-full px-3 py-1.5 text-xs font-bold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:text-ink;
+    @apply inline-flex min-h-[44px] flex-1 sm:flex-initial items-center justify-center rounded-full px-3.5 py-2 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:text-ink;
   }
 
   .ui-lang-btn.is-active {
     @apply bg-primary text-white shadow-xs;
   }
 
-  /* Menu category pill tabs */
+  /* Menu category pill tabs (>=48px touch target) */
   .ui-tab {
-    @apply inline-flex min-h-[40px] shrink-0 items-center justify-center rounded-full border border-border bg-surface px-4 py-2 text-xs sm:text-sm font-bold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:border-primary hover:text-primary;
+    @apply inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-full border border-border bg-surface px-4 py-2.5 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:border-primary hover:text-primary;
   }
 
   .ui-tab.is-active {
-    @apply border-primary bg-primary text-white;
+    @apply border-primary bg-primary text-white shadow-[0_2px_6px_rgba(255,44,44,0.2)];
   }
 
-  /* Variant toggle group */
+  /* Variant toggle group (>=48px mobile touch target, 8px gap) */
   .ui-variant-btn {
-    @apply inline-flex min-h-[36px] flex-1 items-center justify-center rounded-lg border border-border bg-surface-muted px-2.5 py-1.5 text-xs font-bold text-ink-secondary transition-colors cursor-pointer hover:border-primary/60;
+    @apply inline-flex min-h-[48px] sm:min-h-[42px] flex-1 items-center justify-center rounded-xl border border-border bg-surface-muted px-3 py-2 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors cursor-pointer hover:border-primary/60;
   }
 
   .ui-variant-btn.is-active {
-    @apply border-primary bg-primary-soft text-primary;
+    @apply border-primary bg-primary-soft text-primary shadow-2xs;
   }
 
-  /* Quantity stepper */
+  /* Quantity stepper (48x48px buttons on mobile for effortless thumb tapping) */
   .ui-stepper {
-    @apply inline-flex items-center gap-1 rounded-full border border-primary-border bg-primary-soft p-1;
+    @apply inline-flex min-h-[48px] items-center gap-2 rounded-full border border-primary-border bg-primary-soft p-1;
   }
 
   .ui-stepper-btn {
-    @apply inline-flex h-8 w-8 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-primary text-base font-extrabold leading-none text-white transition-colors cursor-pointer hover:bg-primary-hover;
+    @apply inline-flex h-10 w-10 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-primary text-lg font-extrabold leading-none text-white transition-colors cursor-pointer hover:bg-primary-hover;
   }
 
   .ui-stepper-val {
-    @apply min-w-[24px] text-center text-sm font-extrabold text-ink tabular-nums;
+    @apply min-w-[28px] text-center text-sm sm:text-base font-extrabold text-ink tabular-nums;
   }
 
-  /* Selectable radio cards (adapted shadcn RadioGroupItem) */
+  /* Selectable radio cards (adapted shadcn RadioGroupItem, >=52px touch height) */
   .ui-radio-card {
-    @apply flex min-h-[46px] items-center gap-2.5 rounded-lg border border-border bg-surface-muted px-3.5 py-2.5 text-sm font-semibold text-ink transition-colors cursor-pointer hover:border-primary/60 has-[:checked]:border-primary has-[:checked]:bg-primary-soft has-[:checked]:text-primary;
+    @apply flex min-h-[52px] items-center gap-3 rounded-xl border border-border bg-surface-muted px-4 py-3 text-sm font-bold text-ink transition-colors cursor-pointer hover:border-primary/60 has-[:checked]:border-primary has-[:checked]:bg-primary-soft has-[:checked]:text-primary;
   }
 
   .ui-radio-card input {
-    @apply h-4 w-4 shrink-0 accent-primary;
+    @apply h-5 w-5 shrink-0 accent-primary;
   }
 
-  /* Hide scrollbars nicely on horizontal pill strips while keeping scroll functional */
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;

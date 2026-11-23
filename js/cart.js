@@ -29,15 +29,29 @@ function setFeedback(message, type) {
   if (!message) {
     box.hidden = true;
     box.textContent = "";
-    box.className = "rounded-lg border px-3 py-2.5 text-xs sm:text-sm font-semibold";
+    box.className = "rounded-xl border px-3.5 py-3 text-xs sm:text-sm font-semibold";
     return;
   }
   box.hidden = false;
   box.textContent = message;
   box.className =
     type === "success"
-      ? "rounded-lg border border-[#ABEFC6] bg-[#ECFDF3] px-3 py-2.5 text-xs sm:text-sm font-semibold text-[#15703E]"
-      : "rounded-lg border border-primary-border bg-primary-soft px-3 py-2.5 text-xs sm:text-sm font-semibold text-primary";
+      ? "rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-3.5 py-3 text-xs sm:text-sm font-semibold text-[#15703E]"
+      : "rounded-xl border border-primary-border bg-primary-soft px-3.5 py-3 text-xs sm:text-sm font-semibold text-primary";
+}
+
+function updateBranchAddressPreview() {
+  const select = document.getElementById("branch-select");
+  const preview = document.getElementById("branch-address-preview");
+  if (!select || !preview || !state.data) return;
+  const selected = state.data.branches.find((b) => b.name === select.value);
+  if (selected && selected.address) {
+    preview.hidden = false;
+    preview.textContent = selected.address;
+  } else {
+    preview.hidden = true;
+    preview.textContent = "";
+  }
 }
 
 function populateBranches() {
@@ -51,12 +65,13 @@ function populateBranches() {
   select.appendChild(placeholder);
 
   state.data.branches.forEach((branch) => {
-    const opt = el("option", "", `${branch.name} — ${branch.address}`);
+    const opt = el("option", "", branch.name);
     opt.value = branch.name;
     select.appendChild(opt);
   });
 
   if (previous) select.value = previous;
+  updateBranchAddressPreview();
 }
 
 function renderCartItems() {
@@ -78,10 +93,10 @@ function renderCartItems() {
     if (submitBtn) submitBtn.disabled = true;
     if (copyBtn) copyBtn.disabled = true;
 
-    const empty = el("div", "flex flex-col items-center py-8 px-4 text-center");
-    empty.appendChild(el("h3", "mb-1.5 text-lg font-extrabold text-ink", i18n.t("cart.emptyTitle")));
-    empty.appendChild(el("p", "mb-5 max-w-sm text-sm text-ink-muted", i18n.t("cart.emptyText")));
-    const link = el("a", "ui-btn ui-btn-primary", i18n.t("cart.browseMenu"));
+    const empty = el("div", "flex flex-col items-center py-9 px-4 text-center");
+    empty.appendChild(el("h3", "mb-2 text-lg font-extrabold text-ink", i18n.t("cart.emptyTitle")));
+    empty.appendChild(el("p", "mb-6 max-w-sm text-[15px] leading-relaxed text-ink-muted", i18n.t("cart.emptyText")));
+    const link = el("a", "ui-btn ui-btn-primary px-6", i18n.t("cart.browseMenu"));
     link.href = "../#menu";
     empty.appendChild(link);
     container.appendChild(empty);
@@ -96,17 +111,16 @@ function renderCartItems() {
   const mode = state.data ? state.data.mode : "static";
 
   items.forEach((item) => {
-    const row = el("article", "flex gap-3 sm:gap-4 py-4 first:pt-0 last:pb-0");
+    const row = el("article", "flex flex-col gap-3 py-4 first:pt-0 last:pb-0");
 
-    const img = el("img", "menu-img h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-lg bg-[#141517] object-cover");
+    const topRow = el("div", "flex items-start gap-3 sm:gap-4");
+    const img = el("img", "menu-img h-[72px] w-[72px] sm:h-20 sm:w-20 shrink-0 rounded-xl bg-[#141517] object-cover");
     img.alt = i18n.tx(item.itemName);
     bindMenuImage(img, item.menuCode, BASE_PATH, mode);
-    row.appendChild(img);
+    topRow.appendChild(img);
 
-    const content = el("div", "min-w-0 flex-1");
-    const top = el("div", "flex items-start justify-between gap-2");
-    const info = el("div", "min-w-0");
-    info.appendChild(el("h3", "text-sm sm:text-base font-extrabold leading-snug text-ink break-words", i18n.tx(item.itemName)));
+    const info = el("div", "min-w-0 flex-1");
+    info.appendChild(el("h3", "text-[15px] sm:text-base font-extrabold leading-snug text-ink break-words", i18n.tx(item.itemName)));
 
     const metaParts = [`#${item.menuCode}`, i18n.tx(item.categoryName)];
     if (item.variantName && item.variantName !== "Regular") {
@@ -116,20 +130,20 @@ function renderCartItems() {
       metaParts.push(i18n.t("menu.upgradeShort"));
     }
     metaParts.push(i18n.formatIDR(item.unitPrice));
-    info.appendChild(el("div", "mt-0.5 text-xs text-ink-muted break-words", metaParts.join(" · ")));
+    info.appendChild(el("div", "mt-1 text-xs sm:text-sm text-ink-secondary leading-relaxed break-words", metaParts.join(" · ")));
 
     const removeBtn = el(
       "button",
-      "shrink-0 rounded-md px-2 py-1 text-xs font-bold text-ink-muted transition-colors hover:bg-primary-soft hover:text-primary cursor-pointer",
+      "inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-xl border border-border bg-surface-muted px-3.5 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors hover:border-primary-border hover:bg-primary-soft hover:text-primary cursor-pointer",
       i18n.t("cart.removeItem")
     );
     removeBtn.type = "button";
     removeBtn.addEventListener("click", () => cart.removeItem(item.key));
 
-    top.append(info, removeBtn);
-    content.appendChild(top);
+    topRow.append(info, removeBtn);
+    row.appendChild(topRow);
 
-    const controls = el("div", "mt-2.5 flex flex-wrap items-center justify-between gap-2");
+    const controls = el("div", "flex items-center justify-between gap-3 pt-0.5");
     const stepper = el("div", "ui-stepper");
 
     const dec = el("button", "ui-stepper-btn", "−");
@@ -147,18 +161,17 @@ function renderCartItems() {
     stepper.append(dec, val, inc);
     controls.append(
       stepper,
-      el("span", "text-sm sm:text-base font-extrabold text-ink tabular-nums", i18n.formatIDR(item.qty * item.unitPrice))
+      el("span", "text-base sm:text-lg font-extrabold text-ink tabular-nums", i18n.formatIDR(item.qty * item.unitPrice))
     );
-    content.appendChild(controls);
+    row.appendChild(controls);
 
-    const noteInput = el("input", "ui-input mt-2.5 min-h-[38px] bg-surface-muted py-1.5 text-xs sm:text-sm");
+    const noteInput = el("input", "ui-input bg-surface-muted");
     noteInput.type = "text";
     noteInput.value = item.note || "";
     noteInput.placeholder = i18n.t("cart.itemNotePlaceholder");
     noteInput.addEventListener("input", (event) => cart.setNote(item.key, event.target.value));
-    content.appendChild(noteInput);
+    row.appendChild(noteInput);
 
-    row.appendChild(content);
     list.appendChild(row);
   });
 
@@ -187,11 +200,13 @@ function buildOrderMessage() {
   setFeedback("", "");
   const items = cart.getItems();
   const { subtotal } = cart.getTotals();
+  const branchObj = state.data?.branches?.find((b) => b.name === branchVal);
+  const branchLine = branchObj && branchObj.address ? `${branchVal} (${branchObj.address})` : branchVal;
 
   const lines = [
     i18n.t("cart.waGreeting"),
     "",
-    `${i18n.t("cart.waBranch")}: ${branchVal}`,
+    `${i18n.t("cart.waBranch")}: ${branchLine}`,
     `${i18n.t("cart.waCustomer")}: ${customerName}`,
     `${i18n.t("cart.waOrderType")}: ${i18n.t(`cart.${orderTypeKey}`)}`,
     `${i18n.t("cart.waPayment")}: ${i18n.t(`cart.${paymentKey}`)}`,
@@ -241,6 +256,8 @@ async function boot() {
   await i18n.init();
   i18n.mountToggle(document.getElementById("lang-toggle"));
   i18n.applyStaticTranslations();
+
+  document.getElementById("branch-select").addEventListener("change", updateBranchAddressPreview);
 
   document.getElementById("clear-cart-btn").addEventListener("click", () => {
     cart.clear();
