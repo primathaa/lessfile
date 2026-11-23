@@ -29,12 +29,15 @@ function setFeedback(message, type) {
   if (!message) {
     box.hidden = true;
     box.textContent = "";
-    box.className = "form-feedback";
+    box.className = "rounded-lg border px-3 py-2.5 text-xs sm:text-sm font-semibold";
     return;
   }
   box.hidden = false;
   box.textContent = message;
-  box.className = `form-feedback ${type === "success" ? "is-success" : "is-error"}`;
+  box.className =
+    type === "success"
+      ? "rounded-lg border border-[#ABEFC6] bg-[#ECFDF3] px-3 py-2.5 text-xs sm:text-sm font-semibold text-[#15703E]"
+      : "rounded-lg border border-primary-border bg-primary-soft px-3 py-2.5 text-xs sm:text-sm font-semibold text-primary";
 }
 
 function populateBranches() {
@@ -75,10 +78,10 @@ function renderCartItems() {
     if (submitBtn) submitBtn.disabled = true;
     if (copyBtn) copyBtn.disabled = true;
 
-    const empty = el("div", "empty-state");
-    empty.appendChild(el("h2", "", i18n.t("cart.emptyTitle")));
-    empty.appendChild(el("p", "", i18n.t("cart.emptyText")));
-    const link = el("a", "btn btn-primary", i18n.t("cart.browseMenu"));
+    const empty = el("div", "flex flex-col items-center py-8 px-4 text-center");
+    empty.appendChild(el("h3", "mb-1.5 text-lg font-extrabold text-ink", i18n.t("cart.emptyTitle")));
+    empty.appendChild(el("p", "mb-5 max-w-sm text-sm text-ink-muted", i18n.t("cart.emptyText")));
+    const link = el("a", "ui-btn ui-btn-primary", i18n.t("cart.browseMenu"));
     link.href = "../#menu";
     empty.appendChild(link);
     container.appendChild(empty);
@@ -89,21 +92,21 @@ function renderCartItems() {
   if (submitBtn) submitBtn.disabled = false;
   if (copyBtn) copyBtn.disabled = false;
 
-  const list = el("div", "cart-item-list");
+  const list = el("div", "divide-y divide-border-subtle");
   const mode = state.data ? state.data.mode : "static";
 
   items.forEach((item) => {
-    const row = el("article", "cart-item");
+    const row = el("article", "flex gap-3 sm:gap-4 py-4 first:pt-0 last:pb-0");
 
-    const img = el("img", "cart-item-thumb");
+    const img = el("img", "menu-img h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-lg bg-[#141517] object-cover");
     img.alt = i18n.tx(item.itemName);
     bindMenuImage(img, item.menuCode, BASE_PATH, mode);
     row.appendChild(img);
 
-    const content = el("div");
-    const top = el("div", "cart-item-top");
-    const info = el("div");
-    info.appendChild(el("h3", "cart-item-name", i18n.tx(item.itemName)));
+    const content = el("div", "min-w-0 flex-1");
+    const top = el("div", "flex items-start justify-between gap-2");
+    const info = el("div", "min-w-0");
+    info.appendChild(el("h3", "text-sm sm:text-base font-extrabold leading-snug text-ink break-words", i18n.tx(item.itemName)));
 
     const metaParts = [`#${item.menuCode}`, i18n.tx(item.categoryName)];
     if (item.variantName && item.variantName !== "Regular") {
@@ -113,35 +116,42 @@ function renderCartItems() {
       metaParts.push(i18n.t("menu.upgradeShort"));
     }
     metaParts.push(i18n.formatIDR(item.unitPrice));
-    info.appendChild(el("div", "cart-item-meta", metaParts.join(" · ")));
+    info.appendChild(el("div", "mt-0.5 text-xs text-ink-muted break-words", metaParts.join(" · ")));
 
-    const removeBtn = el("button", "cart-item-remove", i18n.t("cart.removeItem"));
+    const removeBtn = el(
+      "button",
+      "shrink-0 rounded-md px-2 py-1 text-xs font-bold text-ink-muted transition-colors hover:bg-primary-soft hover:text-primary cursor-pointer",
+      i18n.t("cart.removeItem")
+    );
     removeBtn.type = "button";
     removeBtn.addEventListener("click", () => cart.removeItem(item.key));
 
     top.append(info, removeBtn);
     content.appendChild(top);
 
-    const controls = el("div", "cart-item-controls");
-    const stepper = el("div", "qty-stepper");
+    const controls = el("div", "mt-2.5 flex flex-wrap items-center justify-between gap-2");
+    const stepper = el("div", "ui-stepper");
 
-    const dec = el("button", "qty-btn", "−");
+    const dec = el("button", "ui-stepper-btn", "−");
     dec.type = "button";
     dec.setAttribute("aria-label", "Decrease quantity");
     dec.addEventListener("click", () => cart.updateQty(item.key, -1));
 
-    const val = el("span", "qty-value", String(item.qty));
+    const val = el("span", "ui-stepper-val", String(item.qty));
 
-    const inc = el("button", "qty-btn", "+");
+    const inc = el("button", "ui-stepper-btn", "+");
     inc.type = "button";
     inc.setAttribute("aria-label", "Increase quantity");
     inc.addEventListener("click", () => cart.updateQty(item.key, 1));
 
     stepper.append(dec, val, inc);
-    controls.append(stepper, el("span", "cart-item-subtotal", i18n.formatIDR(item.qty * item.unitPrice)));
+    controls.append(
+      stepper,
+      el("span", "text-sm sm:text-base font-extrabold text-ink tabular-nums", i18n.formatIDR(item.qty * item.unitPrice))
+    );
     content.appendChild(controls);
 
-    const noteInput = el("input", "cart-note-input");
+    const noteInput = el("input", "ui-input mt-2.5 min-h-[38px] bg-surface-muted py-1.5 text-xs sm:text-sm");
     noteInput.type = "text";
     noteInput.value = item.note || "";
     noteInput.placeholder = i18n.t("cart.itemNotePlaceholder");

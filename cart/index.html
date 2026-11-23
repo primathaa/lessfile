@@ -2,7 +2,8 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF2C2C" />
     <title>Cart — Chicken LessFille Solo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,142 +13,161 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container header-inner">
-        <div class="header-actions">
-          <a href="../" class="back-link">
+  <body class="bg-background text-ink antialiased">
+    <header class="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-sm shadow-[0_1px_3px_rgba(18,20,22,0.06)]">
+      <div class="ui-container flex flex-wrap md:flex-nowrap items-center justify-between gap-x-3 gap-y-2 py-2.5 md:min-h-[64px] md:py-2">
+        <div class="order-1 flex min-w-0 items-center gap-2 sm:gap-3">
+          <a
+            href="../"
+            class="inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-xs sm:text-sm font-bold text-ink transition-colors hover:border-primary hover:text-primary"
+          >
             <span aria-hidden="true">&larr;</span>
             <span data-i18n="nav.backToMenu"></span>
           </a>
-          <a href="../" class="brand-link">
-            <span class="brand-dot" aria-hidden="true"></span>
-            <span id="brand-name-header"></span>
+          <a
+            href="../"
+            class="inline-flex min-w-0 items-center gap-2 text-sm sm:text-base font-extrabold tracking-tight text-ink"
+          >
+            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
+            <span id="brand-name-header" class="truncate"></span>
           </a>
         </div>
 
-        <div class="header-actions">
-          <div id="lang-toggle" class="lang-switch"></div>
-        </div>
+        <div
+          id="lang-toggle"
+          class="ui-lang-switch order-2 w-full md:w-auto"
+        ></div>
       </div>
     </header>
 
-    <main class="cart-page-main">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <p class="section-eyebrow" data-i18n="cart.eyebrow"></p>
-            <h1 class="section-title" data-i18n="cart.title"></h1>
-            <p class="card-text" data-i18n="cart.subtitle"></p>
-          </div>
+    <main class="py-6 sm:py-8 pb-16">
+      <div class="ui-container">
+        <div class="mb-5">
+          <p class="mb-1 text-xs font-extrabold uppercase tracking-wider text-primary" data-i18n="cart.eyebrow"></p>
+          <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-ink" data-i18n="cart.title"></h1>
+          <p class="mt-1 text-sm text-ink-secondary" data-i18n="cart.subtitle"></p>
         </div>
 
-        <div id="cart-root" class="cart-layout" aria-live="polite">
-          <div class="card">
-            <div class="cart-items-header">
-              <h2 class="card-title" data-i18n="cart.itemsTitle" style="margin: 0"></h2>
+        <div
+          id="cart-root"
+          class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.95fr)]"
+          aria-live="polite"
+        >
+          <section class="ui-card p-4 sm:p-6">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-3">
+              <h2 class="text-base sm:text-lg font-extrabold text-ink" data-i18n="cart.itemsTitle"></h2>
               <button
                 id="clear-cart-btn"
                 type="button"
-                class="btn btn-ghost-danger"
+                class="ui-btn ui-btn-ghost-danger"
                 data-i18n="cart.clearCart"
                 hidden
               ></button>
             </div>
             <div id="cart-items-container"></div>
-          </div>
+          </section>
 
-          <aside id="checkout-card" class="card checkout-card">
-            <h2 class="card-title" data-i18n="cart.checkoutTitle"></h2>
+          <aside id="checkout-card" class="ui-card p-4 sm:p-6 lg:sticky lg:top-20">
+            <h2 class="mb-4 text-base sm:text-lg font-extrabold text-ink" data-i18n="cart.checkoutTitle"></h2>
 
-            <form id="checkout-form" novalidate>
-              <div class="form-group">
-                <label for="branch-select" class="form-label" data-i18n="cart.branchLabel"></label>
-                <select id="branch-select" class="form-control" required></select>
+            <form id="checkout-form" class="space-y-4" novalidate>
+              <div class="space-y-1.5">
+                <label for="branch-select" class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.branchLabel"></label>
+                <select id="branch-select" class="ui-select" required></select>
               </div>
 
-              <div class="form-group">
-                <label for="customer-name" class="form-label" data-i18n="cart.nameLabel"></label>
+              <div class="space-y-1.5">
+                <label for="customer-name" class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.nameLabel"></label>
                 <input
                   id="customer-name"
                   type="text"
-                  class="form-control"
+                  class="ui-input"
                   data-i18n-placeholder="cart.namePlaceholder"
                   autocomplete="name"
                   required
                 />
               </div>
 
-              <div class="form-group">
-                <span class="form-label" data-i18n="cart.orderTypeLabel"></span>
-                <div class="radio-row">
-                  <label class="radio-chip">
+              <div class="space-y-1.5">
+                <span class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.orderTypeLabel"></span>
+                <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  <label class="ui-radio-card">
                     <input type="radio" name="orderType" value="dineIn" checked />
-                    <span data-i18n="cart.dineIn"></span>
+                    <span class="leading-snug" data-i18n="cart.dineIn"></span>
                   </label>
-                  <label class="radio-chip">
+                  <label class="ui-radio-card">
                     <input type="radio" name="orderType" value="takeAway" />
-                    <span data-i18n="cart.takeAway"></span>
+                    <span class="leading-snug" data-i18n="cart.takeAway"></span>
                   </label>
                 </div>
               </div>
 
-              <div class="form-group">
-                <span class="form-label" data-i18n="cart.paymentLabel"></span>
-                <div class="radio-row">
-                  <label class="radio-chip">
+              <div class="space-y-1.5">
+                <span class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.paymentLabel"></span>
+                <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  <label class="ui-radio-card">
                     <input type="radio" name="paymentMethod" value="paymentCash" checked />
-                    <span data-i18n="cart.paymentCash"></span>
+                    <span class="leading-snug" data-i18n="cart.paymentCash"></span>
                   </label>
-                  <label class="radio-chip">
+                  <label class="ui-radio-card">
                     <input type="radio" name="paymentMethod" value="paymentEmoney" />
-                    <span data-i18n="cart.paymentEmoney"></span>
+                    <span class="leading-snug" data-i18n="cart.paymentEmoney"></span>
                   </label>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="order-notes" class="form-label" data-i18n="cart.orderNotesLabel"></label>
+              <div class="space-y-1.5">
+                <label for="order-notes" class="block text-xs sm:text-sm font-bold text-ink" data-i18n="cart.orderNotesLabel"></label>
                 <textarea
                   id="order-notes"
                   rows="2"
-                  class="form-control"
+                  class="ui-textarea"
                   data-i18n-placeholder="cart.orderNotesPlaceholder"
                 ></textarea>
               </div>
 
-              <div class="summary-rows">
-                <div class="summary-row">
+              <div class="space-y-2 border-y border-border-subtle py-3.5 text-sm">
+                <div class="flex items-center justify-between text-ink-secondary">
                   <span data-i18n="cart.totalItems"></span>
-                  <strong id="summary-count">0</strong>
+                  <strong id="summary-count" class="font-bold text-ink tabular-nums">0</strong>
                 </div>
-                <div class="summary-row">
+                <div class="flex items-center justify-between text-ink-secondary">
                   <span data-i18n="cart.subtotal"></span>
-                  <strong id="summary-subtotal">Rp 0</strong>
+                  <strong id="summary-subtotal" class="font-bold text-ink tabular-nums">Rp 0</strong>
                 </div>
-                <div class="summary-row is-total">
+                <div class="flex items-center justify-between pt-1 text-base sm:text-lg font-extrabold text-ink">
                   <span data-i18n="cart.total"></span>
-                  <strong id="summary-total">Rp 0</strong>
+                  <strong id="summary-total" class="text-primary tabular-nums">Rp 0</strong>
                 </div>
               </div>
 
-              <p id="form-feedback" class="form-feedback" hidden></p>
+              <p id="form-feedback" class="rounded-lg border px-3 py-2.5 text-xs sm:text-sm font-semibold" hidden></p>
 
-              <div class="checkout-actions">
-                <button id="whatsapp-submit-btn" type="submit" class="btn btn-primary" data-i18n="cart.sendWhatsApp"></button>
-                <button id="copy-summary-btn" type="button" class="btn btn-outline" data-i18n="cart.copySummary"></button>
+              <div class="flex flex-col gap-2.5">
+                <button
+                  id="whatsapp-submit-btn"
+                  type="submit"
+                  class="ui-btn ui-btn-primary w-full min-h-[48px] text-sm sm:text-base"
+                  data-i18n="cart.sendWhatsApp"
+                ></button>
+                <button
+                  id="copy-summary-btn"
+                  type="button"
+                  class="ui-btn ui-btn-outline w-full"
+                  data-i18n="cart.copySummary"
+                ></button>
               </div>
 
-              <p class="payment-hint" data-i18n="cart.paymentNote"></p>
+              <p class="text-xs leading-relaxed text-ink-muted" data-i18n="cart.paymentNote"></p>
             </form>
           </aside>
         </div>
       </div>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <strong id="brand-name-footer"></strong>
+    <footer class="mt-6 border-t border-border bg-surface py-6">
+      <div class="ui-container flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-ink-muted">
+        <strong id="brand-name-footer" class="text-ink"></strong>
         <span data-i18n="footer.rights"></span>
       </div>
     </footer>

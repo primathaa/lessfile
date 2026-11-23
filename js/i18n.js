@@ -100,7 +100,7 @@ export class I18n {
       options.forEach((opt) => {
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.className = `lang-btn${this.lang === opt.code ? " is-active" : ""}`;
+        btn.className = `ui-lang-btn${this.lang === opt.code ? " is-active" : ""}`;
         btn.setAttribute("aria-pressed", String(this.lang === opt.code));
         btn.textContent = opt.label;
         btn.addEventListener("click", () => this.setLang(opt.code));

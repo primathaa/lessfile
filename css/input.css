@@ -1,0 +1,204 @@
+@import "tailwindcss";
+@source "../index.html";
+@source "../cart/index.html";
+@source "../js";
+
+@theme {
+  --color-primary: #FF2C2C;
+  --color-primary-hover: #DC1F1F;
+  --color-primary-soft: #FFF1F1;
+  --color-primary-border: #FFC4C4;
+  --color-background: #EBEFEE;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F4F7F6;
+  --color-ink: #16181A;
+  --color-ink-secondary: #485055;
+  --color-ink-muted: #687177;
+  --color-border: #D4DCDA;
+  --color-border-subtle: #E4EAE8;
+  --color-dark-canvas: #121416;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Adapted shadcn/ui design tokens scoped to Chicken LessFille Solo */
+:root {
+  --background: #EBEFEE;
+  --foreground: #16181A;
+  --card: #FFFFFF;
+  --card-foreground: #16181A;
+  --primary: #FF2C2C;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F7F6;
+  --secondary-foreground: #16181A;
+  --muted: #E4EAE8;
+  --muted-foreground: #5B646A;
+  --accent: #FFF1F1;
+  --accent-foreground: #D61F1F;
+  --border: #D4DCDA;
+  --ring: #FF2C2C;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Ensure anchored sections never hide beneath the sticky header */
+  section[id] {
+    scroll-margin-top: 7.25rem;
+  }
+
+  @media (min-width: 768px) {
+    section[id] {
+      scroll-margin-top: 5rem;
+    }
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Adapted shadcn/ui component primitives */
+@layer components {
+  .ui-container {
+    @apply mx-auto w-full max-w-[1200px] px-3 sm:px-5 lg:px-6;
+  }
+
+  .ui-card {
+    @apply rounded-xl border border-border bg-surface text-ink shadow-[0_1px_3px_rgba(18,20,22,0.06)];
+  }
+
+  .ui-btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-transparent px-4 py-2.5 text-sm font-bold transition-colors duration-150 cursor-pointer select-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .ui-btn-sm {
+    @apply inline-flex min-h-[38px] items-center justify-center gap-1.5 rounded-full border border-transparent px-3.5 py-2 text-xs font-bold transition-colors duration-150 cursor-pointer select-none active:scale-[0.98];
+  }
+
+  .ui-btn-primary {
+    @apply bg-primary text-white hover:bg-primary-hover;
+  }
+
+  .ui-btn-outline {
+    @apply border-border bg-surface text-ink hover:border-primary hover:text-primary;
+  }
+
+  .ui-btn-outline-light {
+    @apply border-white/35 bg-white/10 text-white hover:bg-white hover:text-ink;
+  }
+
+  .ui-btn-ghost-danger {
+    @apply min-h-[38px] border-primary-border bg-transparent px-3.5 py-1.5 text-xs font-bold text-primary hover:bg-primary-soft;
+  }
+
+  .ui-badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-extrabold tracking-wide;
+  }
+
+  .ui-badge-primary {
+    @apply bg-primary text-white;
+  }
+
+  .ui-badge-soft {
+    @apply bg-primary-soft text-primary;
+  }
+
+  .ui-badge-muted {
+    @apply bg-background text-ink-secondary;
+  }
+
+  .ui-input,
+  .ui-select,
+  .ui-textarea {
+    @apply w-full rounded-lg border border-border bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-muted transition-colors focus:border-primary focus:outline-none;
+  }
+
+  .ui-input,
+  .ui-select {
+    @apply min-h-[44px];
+  }
+
+  /* Segmented language switcher (adapted shadcn TabsList/TabsTrigger) */
+  .ui-lang-switch {
+    @apply inline-flex items-center rounded-full border border-border bg-background p-1 gap-1;
+  }
+
+  .ui-lang-btn {
+    @apply inline-flex min-h-[36px] flex-1 sm:flex-initial items-center justify-center rounded-full px-3 py-1.5 text-xs font-bold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:text-ink;
+  }
+
+  .ui-lang-btn.is-active {
+    @apply bg-primary text-white shadow-xs;
+  }
+
+  /* Menu category pill tabs */
+  .ui-tab {
+    @apply inline-flex min-h-[40px] shrink-0 items-center justify-center rounded-full border border-border bg-surface px-4 py-2 text-xs sm:text-sm font-bold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:border-primary hover:text-primary;
+  }
+
+  .ui-tab.is-active {
+    @apply border-primary bg-primary text-white;
+  }
+
+  /* Variant toggle group */
+  .ui-variant-btn {
+    @apply inline-flex min-h-[36px] flex-1 items-center justify-center rounded-lg border border-border bg-surface-muted px-2.5 py-1.5 text-xs font-bold text-ink-secondary transition-colors cursor-pointer hover:border-primary/60;
+  }
+
+  .ui-variant-btn.is-active {
+    @apply border-primary bg-primary-soft text-primary;
+  }
+
+  /* Quantity stepper */
+  .ui-stepper {
+    @apply inline-flex items-center gap-1 rounded-full border border-primary-border bg-primary-soft p-1;
+  }
+
+  .ui-stepper-btn {
+    @apply inline-flex h-8 w-8 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-primary text-base font-extrabold leading-none text-white transition-colors cursor-pointer hover:bg-primary-hover;
+  }
+
+  .ui-stepper-val {
+    @apply min-w-[24px] text-center text-sm font-extrabold text-ink tabular-nums;
+  }
+
+  /* Selectable radio cards (adapted shadcn RadioGroupItem) */
+  .ui-radio-card {
+    @apply flex min-h-[46px] items-center gap-2.5 rounded-lg border border-border bg-surface-muted px-3.5 py-2.5 text-sm font-semibold text-ink transition-colors cursor-pointer hover:border-primary/60 has-[:checked]:border-primary has-[:checked]:bg-primary-soft has-[:checked]:text-primary;
+  }
+
+  .ui-radio-card input {
+    @apply h-4 w-4 shrink-0 accent-primary;
+  }
+
+  /* Hide scrollbars nicely on horizontal pill strips while keeping scroll functional */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.menu-img.is-missing {
+  opacity: 0.2;
+}
