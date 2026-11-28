@@ -8,193 +8,380 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body class="bg-background text-ink antialiased">
-    <header class="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-md shadow-[0_1px_3px_rgba(18,20,22,0.06)]">
-      <div class="ui-container flex flex-col gap-2.5 py-2.5 md:min-h-[72px] md:flex-row md:items-center md:justify-between md:gap-4 md:py-2">
-        <div class="flex min-w-0 items-center justify-between gap-2 md:contents">
-          <a
-            href="./"
-            class="inline-flex min-h-[48px] min-w-0 items-center gap-1.5 sm:gap-2 text-sm sm:text-base lg:text-lg font-extrabold tracking-tight text-ink md:order-1"
-            aria-label="Home"
-          >
-            <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" aria-hidden="true"></span>
-            <span id="brand-name-header" class=" leading-tight"></span>
+  <body class="bg-bg-body text-text-primary antialiased">
+    <div class="ax-appshell">
+      <!-- Left SideNav (Desktop >= 1024px, 240px frame budget) -->
+      <aside class="ax-sidenav" aria-label="Sidebar navigation">
+        <div class="space-y-6">
+          <a href="./" class="flex items-center gap-3 group" aria-label="Home">
+            <span
+              class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-element)] bg-accent text-sm font-extrabold tracking-tight text-on-accent shadow-[var(--shadow-low)]"
+              aria-hidden="true"
+              >LF</span
+            >
+            <div class="min-w-0">
+              <div id="brand-name-sidenav" class="truncate text-sm font-extrabold text-text-primary">
+                LessFille Solo
+              </div>
+              <div class="text-[11px] font-medium text-text-secondary" data-i18n="shell.subtitle">
+                Astryx Ordering
+              </div>
+            </div>
           </a>
 
-          <a
-            href="./cart/"
-            class="inline-flex min-h-[48px] shrink-0 items-center gap-1.5 sm:gap-2 rounded-full bg-ink px-3 sm:px-5 py-2 text-xs sm:text-sm font-extrabold text-white transition-colors hover:bg-primary group md:order-4"
-          >
-            <span data-i18n="nav.cart">Keranjang</span>
-            <span
-              id="header-cart-badge"
-              class="inline-flex h-6 min-w-[24px] items-center justify-center rounded-full bg-primary px-1.5 text-xs font-extrabold text-white transition-colors group-hover:bg-white group-hover:text-primary tabular-nums"
-            >0</span>
-          </a>
+          <div>
+            <div class="ax-caption mb-2 px-2 text-text-secondary" data-i18n="shell.menuCategories">
+              KATEGORI MENU
+            </div>
+            <nav id="sidenav-categories" class="space-y-1" aria-label="Menu categories"></nav>
+          </div>
+
+          <div class="border-t border-border-subtle pt-4">
+            <nav class="space-y-1" aria-label="Business sections">
+              <a href="#about" class="ax-nav-item" data-i18n="nav.about">Profil</a>
+              <a href="#branches" class="ax-nav-item" data-i18n="nav.branches">Cabang</a>
+              <a href="#contact" class="ax-nav-item" data-i18n="nav.contact">Kontak</a>
+            </nav>
+          </div>
         </div>
 
-        <nav class="hidden lg:flex items-center gap-2 md:order-2" aria-label="Main navigation">
-          <a href="#menu" class="inline-flex min-h-[48px] items-center rounded-full px-4 text-sm font-bold text-ink-secondary transition-colors hover:bg-background hover:text-ink" data-i18n="nav.menu">Menu</a>
-          <a href="#about" class="inline-flex min-h-[48px] items-center rounded-full px-4 text-sm font-bold text-ink-secondary transition-colors hover:bg-background hover:text-ink" data-i18n="nav.about">Profil</a>
-          <a href="#branches" class="inline-flex min-h-[48px] items-center rounded-full px-4 text-sm font-bold text-ink-secondary transition-colors hover:bg-background hover:text-ink" data-i18n="nav.branches">Cabang</a>
-          <a href="#contact" class="inline-flex min-h-[48px] items-center rounded-full px-4 text-sm font-bold text-ink-secondary transition-colors hover:bg-background hover:text-ink" data-i18n="nav.contact">Kontak</a>
-        </nav>
+        <div class="mt-6 border-t border-border-subtle pt-4">
+          <div class="ax-caption mb-2 px-1 text-text-secondary" data-i18n="shell.outletInfo">
+            INFO OUTLET
+          </div>
+          <div class="rounded-[var(--radius-container)] border border-border-subtle bg-bg-muted p-3.5 space-y-1.5">
+            <span class="ax-badge ax-badge-success" data-i18n="shell.openNow">BUKA NOW</span>
+            <div class="text-xs font-extrabold text-text-primary pt-0.5" data-i18n="shell.region">
+              Solo &amp; Sekitarnya
+            </div>
+            <div class="text-[11px] leading-relaxed text-text-secondary">
+              <div data-i18n="shell.serviceInfo">Dine-in · Take-Away</div>
+              <div data-i18n="shell.refillInfo">Free Refill Es Teh</div>
+              <div id="sidenav-branches-summary" class="mt-1 font-semibold text-text-primary"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
 
-        <div
-          id="lang-toggle"
-          class="ui-lang-switch w-full md:order-3 md:w-auto"
-        ></div>
-      </div>
-    </header>
+      <!-- Center Main Canvas -->
+      <div class="ax-main">
+        <!-- Sticky Top Bar -->
+        <header class="sticky top-0 z-30 border-b border-border-default bg-bg-surface/95 backdrop-blur-md">
+          <div class="mx-auto flex max-w-[960px] flex-col gap-2.5 px-3.5 py-2.5 sm:px-5 lg:flex-row lg:items-center lg:justify-between lg:gap-3 lg:px-6 lg:py-3">
+            <!-- Mobile Header Top Row -->
+            <div class="flex items-center justify-between gap-2 lg:hidden">
+              <a href="./" class="flex min-w-0 items-center gap-2.5" aria-label="Home">
+                <span
+                  class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-element)] bg-accent text-xs font-extrabold text-on-accent"
+                  aria-hidden="true"
+                  >LF</span
+                >
+                <div class="min-w-0">
+                  <div
+                    id="brand-name-header"
+                    class="truncate text-sm font-extrabold leading-tight text-text-primary"
+                  ></div>
+                  <div
+                    class="truncate text-[11px] font-medium text-text-secondary"
+                    data-i18n="shell.mobileSubtitle"
+                  ></div>
+                </div>
+              </a>
 
-    <nav class="border-b border-border bg-surface lg:hidden" aria-label="Quick section navigation">
-      <div class="ui-container grid grid-cols-4 gap-2 py-2.5 sm:flex sm:items-center sm:overflow-x-auto no-scrollbar">
-        <a href="#menu" class="inline-flex min-h-[48px] items-center justify-center rounded-full bg-surface-muted border border-border px-2.5 sm:px-4 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors hover:border-primary hover:text-primary" data-i18n="nav.menu">Menu</a>
-        <a href="#about" class="inline-flex min-h-[48px] items-center justify-center rounded-full bg-surface-muted border border-border px-2.5 sm:px-4 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors hover:border-primary hover:text-primary" data-i18n="nav.about">Profil</a>
-        <a href="#branches" class="inline-flex min-h-[48px] items-center justify-center rounded-full bg-surface-muted border border-border px-2.5 sm:px-4 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors hover:border-primary hover:text-primary" data-i18n="nav.branches">Cabang</a>
-        <a href="#contact" class="inline-flex min-h-[48px] items-center justify-center rounded-full bg-surface-muted border border-border px-2.5 sm:px-4 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors hover:border-primary hover:text-primary" data-i18n="nav.contact">Kontak</a>
-      </div>
-    </nav>
-
-    <main>
-      <section class="pt-5 pb-4 sm:pt-7 sm:pb-6" aria-labelledby="hero-title">
-        <div class="ui-container">
-          <div class="overflow-hidden rounded-2xl border border-black/10 bg-dark-canvas shadow-[0_8px_24px_rgba(18,20,22,0.12)] lg:relative lg:flex lg:min-h-[440px] xl:min-h-[480px] lg:items-center">
-            <div class="aspect-[16/9] w-full overflow-hidden bg-dark-canvas lg:absolute lg:inset-0 lg:aspect-auto lg:h-full">
-              <img
-                src="./assets/hero-banner.jpg"
-                class="h-full w-full object-cover object-center lg:object-right"
-                data-i18n-alt="hero.imageAlt"
-                alt=""
-                fetchpriority="high"
-              />
-              <div
-                class="hidden lg:block lg:absolute lg:inset-y-0 lg:left-0 lg:w-[54%] lg:bg-dark-canvas/75 lg:[mask-image:linear-gradient(to_right,black_68%,transparent)]"
-                aria-hidden="true"
-              ></div>
+              <button
+                type="button"
+                data-theme-toggle
+                class="ax-btn ax-btn-muted min-h-[34px] shrink-0 rounded-full px-3 py-1 text-[11px] font-extrabold"
+              >
+                <span data-theme-label>Light Mode</span>
+              </button>
             </div>
 
-            <div class="relative z-10 p-5 sm:p-8 lg:max-w-[540px] lg:px-10 lg:py-12 text-white">
-              <span
-                class="mb-3.5 inline-flex rounded-lg bg-primary px-3 py-1.5 text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-white leading-snug"
-                data-i18n="hero.eyebrow"
-              ></span>
-              <h1
-                id="hero-title"
-                class="mb-3 text-[clamp(1.65rem,5vw,3rem)] font-extrabold leading-[1.12] tracking-[-0.025em] text-white text-balance"
-              ></h1>
-              <p
-                id="hero-lead"
-                class="mb-6 text-[15px] sm:text-base leading-[1.65] text-[#E2E8E6] max-w-[60ch]"
-              ></p>
-              <div class="flex flex-col sm:flex-row gap-3">
-                <a href="#menu" class="ui-btn ui-btn-primary w-full sm:w-auto px-6" data-i18n="hero.ctaMenu"></a>
-                <a href="#branches" class="ui-btn ui-btn-outline-light w-full sm:w-auto px-6" data-i18n="hero.ctaBranches"></a>
+            <!-- Search + Language, Mobile Cart & Desktop Theme Controls -->
+            <div class="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between lg:flex-1">
+              <div class="relative flex-1 lg:max-w-md">
+                <label for="menu-search" class="sr-only" data-i18n="menu.searchLabel"></label>
+                <input
+                  id="menu-search"
+                  type="search"
+                  class="ax-input"
+                  data-i18n-placeholder="menu.searchPlaceholder"
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="flex items-center justify-between gap-2 sm:justify-end">
+                <div id="lang-toggle" class="ax-segmented flex-1 sm:flex-initial"></div>
+                <a
+                  href="./cart/"
+                  class="inline-flex min-h-[38px] shrink-0 items-center gap-1.5 rounded-[var(--radius-element)] bg-bg-inverted px-3 py-1.5 text-xs font-extrabold text-bg-surface lg:hidden"
+                >
+                  <span data-i18n="nav.cart">Keranjang</span>
+                  <span
+                    id="header-cart-badge"
+                    class="inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-accent px-1 text-[10px] font-extrabold text-on-accent tabular-nums"
+                    >0</span
+                  >
+                </a>
+                <button
+                  type="button"
+                  data-theme-toggle
+                  class="ax-btn ax-btn-outline hidden lg:inline-flex"
+                >
+                  <span data-theme-label>Light Mode</span>
+                </button>
               </div>
             </div>
           </div>
 
-          <div
-            id="highlights-strip"
-            class="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-3 sm:gap-4"
-            aria-live="polite"
-          ></div>
-        </div>
-      </section>
-
-      <section id="menu" class="py-8 sm:py-12" aria-labelledby="menu-section-title">
-        <div class="ui-container">
-          <div class="mb-4 flex flex-col gap-3.5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p class="mb-1 text-xs font-extrabold uppercase tracking-wider text-primary" data-i18n="menu.sectionEyebrow"></p>
-              <h2 id="menu-section-title" class="text-[clamp(1.35rem,3.5vw,2rem)] font-extrabold tracking-tight text-ink text-balance" data-i18n="menu.sectionTitle"></h2>
-            </div>
-            <div class="w-full sm:w-80 sm:shrink-0">
-              <label for="menu-search" class="sr-only" data-i18n="menu.searchLabel"></label>
-              <input
-                id="menu-search"
-                type="search"
-                class="ui-input rounded-full"
-                data-i18n-placeholder="menu.searchPlaceholder"
-                autocomplete="off"
-              />
-            </div>
-          </div>
-
-          <div class="mb-6 bg-background/95 py-2.5 backdrop-blur-sm md:sticky md:top-[72px] md:z-20">
+          <!-- Mobile Category Pills & Quick Section Jump (< 1024px) -->
+          <div class="border-t border-border-subtle bg-bg-surface px-3.5 py-2 sm:px-5 lg:hidden">
             <div
               id="category-tabs"
-              class="flex items-center gap-2.5 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0 no-scrollbar"
+              class="flex items-center gap-2 overflow-x-auto no-scrollbar"
               role="tablist"
             ></div>
           </div>
+        </header>
 
-          <div id="menu-container" aria-live="polite">
-            <div class="ui-card p-8 text-center text-sm sm:text-base text-ink-secondary" data-i18n="menu.loading"></div>
+        <main class="mx-auto max-w-[960px] px-3.5 sm:px-5 lg:px-6">
+          <!-- Hero Promo Banner (Astryx Container 12px + Concentric 8px Preview) -->
+          <section class="pt-4 pb-2 sm:pt-5" aria-labelledby="hero-title">
+            <div class="ax-hero-card p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
+              <div class="min-w-0 flex-1 space-y-2.5">
+                <span class="ax-badge ax-badge-primary" data-i18n="hero.eyebrow"></span>
+                <h1
+                  id="hero-title"
+                  class="text-xl sm:text-2xl lg:text-[26px] font-extrabold leading-tight tracking-tight text-white"
+                ></h1>
+                <p
+                  id="hero-lead"
+                  class="text-xs sm:text-sm leading-relaxed text-[#D5DCE2] max-w-[56ch]"
+                ></p>
+                <div class="flex flex-wrap items-center gap-2 pt-1">
+                  <a href="#menu" class="ax-btn ax-btn-primary" data-i18n="hero.ctaMenu"></a>
+                  <a
+                    href="#branches"
+                    class="ax-btn border-white/25 bg-white/10 text-white hover:bg-white hover:text-[#0A1317]"
+                    data-i18n="hero.ctaBranches"
+                  ></a>
+                </div>
+              </div>
+
+              <div class="w-full sm:w-44 md:w-52 lg:w-60 shrink-0">
+                <div class="aspect-[16/9] sm:aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-element)] border border-white/15 bg-[#121316]">
+                  <img
+                    src="./assets/hero-banner.jpg"
+                    class="h-full w-full object-cover object-right"
+                    data-i18n-alt="hero.imageAlt"
+                    alt=""
+                    fetchpriority="high"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="highlights-strip"
+              class="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3"
+              aria-live="polite"
+            ></div>
+          </section>
+
+          <!-- Menu Section -->
+          <section id="menu" class="py-5 sm:py-7" aria-labelledby="menu-section-title">
+            <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2
+                  id="menu-section-title"
+                  class="ax-heading-2 text-text-primary"
+                  data-i18n="shell.allPickedTitle"
+                ></h2>
+                <p id="menu-section-subtitle" class="ax-supporting text-text-secondary mt-0.5"></p>
+              </div>
+              <a
+                href="#about"
+                class="text-xs font-extrabold text-text-accent hover:underline lg:hidden"
+                data-i18n="nav.about"
+              ></a>
+            </div>
+
+            <div id="menu-container" aria-live="polite">
+              <div class="ax-card-padded text-center text-sm text-text-secondary" data-i18n="menu.loading"></div>
+            </div>
+
+            <!-- Green Regular Package Satisfaction Callout (from 02-components-astryx.png) -->
+            <div
+              id="reguler-guarantee-banner"
+              class="mt-6 rounded-[var(--radius-container)] border border-success/30 bg-[var(--color-success-muted)] p-4"
+            >
+              <div class="text-xs sm:text-sm font-extrabold text-success" data-i18n="shell.refillCalloutTitle"></div>
+              <p id="reguler-guarantee-text" class="mt-1 text-xs sm:text-sm text-text-primary leading-relaxed"></p>
+            </div>
+          </section>
+
+          <!-- Business Profile Section -->
+          <section id="about" class="py-6 sm:py-8 border-t border-border-subtle" aria-labelledby="about-section-title">
+            <div class="mb-4">
+              <p class="ax-caption text-text-accent mb-1" data-i18n="business.sectionEyebrow"></p>
+              <h2 id="about-section-title" class="ax-heading-2 text-text-primary" data-i18n="business.sectionTitle"></h2>
+            </div>
+            <div id="business-container" class="grid grid-cols-1 gap-3.5 lg:grid-cols-12"></div>
+          </section>
+
+          <!-- Official Branches Section -->
+          <section id="branches" class="py-6 sm:py-8 border-t border-border-subtle" aria-labelledby="branches-section-title">
+            <div class="mb-4">
+              <p class="ax-caption text-text-accent mb-1" data-i18n="branches.sectionEyebrow"></p>
+              <h2 id="branches-section-title" class="ax-heading-2 text-text-primary" data-i18n="branches.sectionTitle"></h2>
+            </div>
+            <div id="branches-container" class="grid grid-cols-1 gap-3.5 md:grid-cols-3"></div>
+          </section>
+
+          <!-- Contact & Social Section -->
+          <section id="contact" class="py-6 sm:py-8 border-t border-border-subtle" aria-labelledby="contact-section-title">
+            <div class="mb-4">
+              <p class="ax-caption text-text-accent mb-1" data-i18n="contact.sectionEyebrow"></p>
+              <h2 id="contact-section-title" class="ax-heading-2 text-text-primary" data-i18n="contact.sectionTitle"></h2>
+            </div>
+            <div id="contact-container" class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"></div>
+          </section>
+
+          <footer class="mt-6 border-t border-border-default py-6 text-xs text-text-secondary flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <strong id="brand-name-footer" class="text-text-primary"></strong>
+            <span data-i18n="footer.rights"></span>
+          </footer>
+        </main>
+      </div>
+
+      <!-- Right Cart Inspector (Desktop >= 1024px, 340px frame budget) -->
+      <aside class="ax-inspector" aria-label="Live order cart">
+        <div class="flex items-center justify-between gap-2 pb-3 border-b border-border-subtle">
+          <h2 class="text-base font-extrabold text-text-primary" data-i18n="cart.title">
+            Keranjang Pesanan
+          </h2>
+          <span id="inspector-count-badge" class="ax-badge ax-badge-soft">0 Item</span>
+        </div>
+
+        <!-- Take-Away / Dine-In Segmented Control -->
+        <div
+          id="inspector-order-type"
+          class="ax-segmented mt-3 grid w-full grid-cols-2"
+          role="group"
+        >
+          <button
+            type="button"
+            data-order-mode="takeAway"
+            class="ax-segmented-btn is-active"
+            data-i18n="cart.takeAway"
+          >
+            Take-Away
+          </button>
+          <button
+            type="button"
+            data-order-mode="dineIn"
+            class="ax-segmented-btn"
+            data-i18n="cart.dineIn"
+          >
+            Dine-In
+          </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div
+          id="inspector-items"
+          class="my-3 flex-1 overflow-y-auto divide-y divide-border-subtle pr-0.5"
+          aria-live="polite"
+        ></div>
+
+        <!-- Quick Branch & Name Selector for Direct WhatsApp Checkout -->
+        <div class="space-y-2 border-t border-border-subtle pt-3">
+          <div>
+            <label for="inspector-branch" class="sr-only" data-i18n="cart.branchLabel"></label>
+            <select id="inspector-branch" class="ax-select text-xs py-2 min-h-[38px]"></select>
+          </div>
+          <div>
+            <label for="inspector-customer-name" class="sr-only" data-i18n="cart.nameLabel"></label>
+            <input
+              id="inspector-customer-name"
+              type="text"
+              class="ax-input text-xs py-2 min-h-[38px]"
+              data-i18n-placeholder="cart.namePlaceholder"
+              autocomplete="name"
+            />
           </div>
         </div>
-      </section>
 
-      <section id="about" class="py-8 sm:py-12" aria-labelledby="about-section-title">
-        <div class="ui-container">
-          <div class="mb-5">
-            <p class="mb-1 text-xs font-extrabold uppercase tracking-wider text-primary" data-i18n="business.sectionEyebrow"></p>
-            <h2 id="about-section-title" class="text-[clamp(1.35rem,3.5vw,2rem)] font-extrabold tracking-tight text-ink text-balance" data-i18n="business.sectionTitle"></h2>
+        <!-- Inspector Footer Summary -->
+        <div class="mt-3 border-t border-border-default pt-3 space-y-2">
+          <div class="flex items-center justify-between text-xs text-text-secondary">
+            <span id="inspector-subtotal-label" data-i18n="cart.subtotal">Subtotal</span>
+            <strong id="inspector-subtotal" class="font-bold text-text-primary tabular-nums">Rp 0</strong>
           </div>
-          <div id="business-container" class="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-12"></div>
-        </div>
-      </section>
-
-      <section id="branches" class="py-8 sm:py-12" aria-labelledby="branches-section-title">
-        <div class="ui-container">
-          <div class="mb-5">
-            <p class="mb-1 text-xs font-extrabold uppercase tracking-wider text-primary" data-i18n="branches.sectionEyebrow"></p>
-            <h2 id="branches-section-title" class="text-[clamp(1.35rem,3.5vw,2rem)] font-extrabold tracking-tight text-ink text-balance" data-i18n="branches.sectionTitle"></h2>
+          <div class="flex items-center justify-between text-xs text-text-secondary">
+            <span data-i18n="shell.serviceFee">Biaya Layanan</span>
+            <strong class="font-bold text-success" data-i18n="shell.free">Gratis</strong>
           </div>
-          <div id="branches-container" class="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-3"></div>
-        </div>
-      </section>
-
-      <section id="contact" class="py-8 sm:py-12" aria-labelledby="contact-section-title">
-        <div class="ui-container">
-          <div class="mb-5">
-            <p class="mb-1 text-xs font-extrabold uppercase tracking-wider text-primary" data-i18n="contact.sectionEyebrow"></p>
-            <h2 id="contact-section-title" class="text-[clamp(1.35rem,3.5vw,2rem)] font-extrabold tracking-tight text-ink text-balance" data-i18n="contact.sectionTitle"></h2>
+          <div class="flex items-center justify-between pt-1 text-sm font-extrabold text-text-primary">
+            <span data-i18n="cart.total">Total Bayar</span>
+            <strong id="inspector-total" class="text-base text-text-accent tabular-nums">Rp 0</strong>
           </div>
-          <div id="contact-container" class="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-5"></div>
-        </div>
-      </section>
-    </main>
 
+          <p
+            id="inspector-feedback"
+            class="rounded-[var(--radius-element)] border border-accent/30 bg-accent-muted px-2.5 py-1.5 text-[11px] font-semibold text-text-accent"
+            hidden
+          ></p>
+
+          <div class="space-y-2 pt-1">
+            <button
+              id="inspector-checkout-btn"
+              type="button"
+              class="ax-btn-lg ax-btn-primary w-full"
+              data-i18n="shell.checkoutWa"
+            >
+              Checkout via WhatsApp →
+            </button>
+            <a
+              href="./cart/"
+              class="ax-btn ax-btn-outline w-full text-xs"
+              data-i18n="shell.openFullCart"
+            ></a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Mobile Sticky Floating Cart Bar (< 1024px, --shadow-high) -->
     <div
       id="floating-cart"
-      class="pointer-events-none fixed inset-x-0 bottom-3.5 z-50 px-4 pb-[env(safe-area-inset-bottom)]"
+      class="pointer-events-none fixed inset-x-0 bottom-3 z-50 px-3.5 pb-[env(safe-area-inset-bottom)] lg:hidden"
       hidden
     >
-      <div class="pointer-events-auto mx-auto flex max-w-2xl items-center justify-between gap-3 rounded-full bg-dark-canvas py-2 pl-5 pr-2 sm:pl-6 text-white shadow-[0_12px_32px_rgba(18,20,22,0.28)]">
-        <div class="flex min-w-0 flex-wrap items-baseline gap-x-2.5 gap-y-0.5">
-          <span id="floating-cart-count" class="text-xs sm:text-sm font-bold text-[#D1D9D7]"></span>
-          <span id="floating-cart-total" class="text-sm sm:text-base font-extrabold text-white tabular-nums"></span>
+      <div class="ax-floating-bar pointer-events-auto mx-auto flex max-w-lg items-center justify-between gap-3 p-2.5">
+        <div class="flex min-w-0 items-center gap-3">
+          <span
+            id="floating-cart-badge"
+            class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-element)] bg-accent text-xs font-extrabold text-on-accent tabular-nums"
+            >0</span
+          >
+          <div class="min-w-0">
+            <div id="floating-cart-count" class="truncate text-[11px] font-medium text-[#AAAFB5]"></div>
+            <div id="floating-cart-total" class="text-sm font-extrabold text-white tabular-nums"></div>
+          </div>
         </div>
         <a
           href="./cart/"
-          class="ui-btn ui-btn-primary shrink-0 px-5 sm:px-6 text-xs sm:text-sm"
+          class="ax-btn ax-btn-primary shrink-0 px-4 py-2.5 text-xs font-extrabold"
           data-i18n="floatingCart.viewCart"
         ></a>
       </div>
     </div>
-
-    <footer class="mt-8 border-t border-border bg-surface pt-7 pb-28">
-      <div class="ui-container flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-ink-muted">
-        <strong id="brand-name-footer" class="text-ink"></strong>
-        <span data-i18n="footer.rights"></span>
-      </div>
-    </footer>
 
     <script type="module" src="./js/home.js"></script>
   </body>

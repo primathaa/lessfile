@@ -7,7 +7,14 @@
   "lang": {
     "label": "Select language",
     "id": "Bahasa Indonesia",
-    "en": "English"
+    "en": "English",
+    "shortId": "ID",
+    "shortEn": "EN"
+  },
+  "theme": {
+    "toggleAria": "Toggle light or dark color theme",
+    "light": "Light Mode",
+    "dark": "Dark Mode"
   },
   "nav": {
     "menu": "Menu",
@@ -17,8 +24,27 @@
     "cart": "Cart",
     "backToMenu": "Back to Menu"
   },
+  "shell": {
+    "subtitle": "Astryx Ordering",
+    "mobileSubtitle": "Solo · Boneless Jumbo · Open",
+    "menuCategories": "MENU CATEGORIES",
+    "outletInfo": "OUTLET INFO",
+    "openNow": "OPEN NOW",
+    "region": "Solo & Surrounding",
+    "serviceInfo": "Dine-in · Take-Away",
+    "refillInfo": "Free Iced Tea Refill",
+    "allPickedTitle": "All Featured Menu",
+    "allPickedSub": "{count} items available · Click + Add to place in your order cart",
+    "serviceFee": "Service Fee",
+    "free": "Free",
+    "checkoutWa": "Checkout via WhatsApp →",
+    "orderWaShort": "Order via WA →",
+    "openFullCart": "Open Full Cart Page",
+    "refillCalloutTitle": "Regular Package Satisfaction Guarantee",
+    "viewAll": "View All"
+  },
   "hero": {
-    "eyebrow": "Solo Raya · Boneless Fried Chicken",
+    "eyebrow": "SATISFACTION GUARANTEED · CHICKEN BURGER SERIES",
     "ctaMenu": "Explore Menu",
     "ctaBranches": "Our Branches",
     "ctaCart": "Open Cart",
@@ -27,13 +53,13 @@
   "menu": {
     "sectionEyebrow": "Our Menu",
     "sectionTitle": "Choose Your Favorites",
-    "searchPlaceholder": "Search menu, sauce, or code...",
+    "searchPlaceholder": "Search LessFille menu (e.g., Brown Melt, Mentai, Nashville)...",
     "searchLabel": "Search menu",
     "allCategories": "All",
     "variantLabel": "Variant",
     "codePrefix": "Code",
-    "upgradeToggle": "Upgrade to Combo (+Rp 4,000)",
-    "upgradeShort": "Combo (+4K)",
+    "upgradeToggle": "+ Upgrade to Combo (+Rp 4,000)",
+    "upgradeShort": "Combo Upgrade +4K",
     "addToCart": "Add",
     "added": "Added",
     "emptySearch": "No menu items match your search.",
@@ -70,14 +96,15 @@
     "chatWa": "Chat on WhatsApp"
   },
   "floatingCart": {
-    "items": "{count} items",
-    "viewCart": "View Cart"
+    "items": "{count} items in cart · LessFille Solo",
+    "viewCart": "Order via WA →"
   },
   "cart": {
     "eyebrow": "Order Summary",
-    "title": "Your Cart",
+    "title": "Order Cart",
     "subtitle": "Review your items, pick a branch, and send your order via WhatsApp.",
     "itemsTitle": "Order Items",
+    "itemBadge": "{count} Items",
     "clearCart": "Clear Cart",
     "emptyTitle": "Your cart is empty",
     "emptyText": "No items selected yet. Browse our boneless fried chicken menu to get started.",
@@ -85,6 +112,7 @@
     "itemNotePlaceholder": "Item note (optional, e.g. sauce on the side)",
     "removeItem": "Remove",
     "subtotal": "Subtotal",
+    "subtotalItems": "Subtotal ({count} items)",
     "totalItems": "Total Items",
     "total": "Total Payment",
     "checkoutTitle": "Order Details",
@@ -93,14 +121,14 @@
     "nameLabel": "Customer Name",
     "namePlaceholder": "Enter your name",
     "orderTypeLabel": "Order Type",
-    "dineIn": "Dine-in",
-    "takeAway": "Take-away",
+    "dineIn": "Dine-In",
+    "takeAway": "Take-Away",
     "paymentLabel": "Payment Method",
     "paymentCash": "Cash",
     "paymentEmoney": "E-Money / Cashless",
     "orderNotesLabel": "Additional Notes",
     "orderNotesPlaceholder": "General notes for cashier/branch (optional)",
-    "sendWhatsApp": "Order via WhatsApp",
+    "sendWhatsApp": "Checkout via WhatsApp →",
     "copySummary": "Copy Summary",
     "copied": "Summary copied!",
     "validationBranch": "Please select a destination branch first.",

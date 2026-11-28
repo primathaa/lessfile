@@ -6,7 +6,7 @@ Website for **Chicken LessFille Solo** built with minimal dependencies, custom b
 
 - `index.html` — Homepage (AI-generated hero banner, menu with code-paired images, business profile, official branches, social/contact, floating cart bar)
 - `cart/index.html` — Cart & WhatsApp order page (`/cart`)
-- `css/input.css` — Tailwind CSS v4 source + adapted shadcn/ui brand tokens (`#FF2C2C` primary, `#EBEFEE` background)
+- `css/input.css` — Tailwind CSS v4 source + Astryx Design System (`@astryxdesign/core`) semantic tokens, Light/Dark modes (`[data-astryx-colors="Dark"]`), concentric radii, 4dp spacing, geometric typography, and motion tokens
 - `css/style.css` — Precompiled production Tailwind CSS stylesheet (zero runtime JS)
 - `js/` — Native ES modules (`i18n.js`, `parser.js`, `data-loader.js`, `cart-store.js`, `home.js`, `cart.js`)
 - `i18n/` — Custom translation dictionaries (`id.json`, `en.json`)

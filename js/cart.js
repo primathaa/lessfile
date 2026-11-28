@@ -29,15 +29,15 @@ function setFeedback(message, type) {
   if (!message) {
     box.hidden = true;
     box.textContent = "";
-    box.className = "rounded-xl border px-3.5 py-3 text-xs sm:text-sm font-semibold";
+    box.className = "rounded-[var(--radius-element)] border px-3 py-2.5 text-xs font-semibold";
     return;
   }
   box.hidden = false;
   box.textContent = message;
   box.className =
     type === "success"
-      ? "rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-3.5 py-3 text-xs sm:text-sm font-semibold text-[#15703E]"
-      : "rounded-xl border border-primary-border bg-primary-soft px-3.5 py-3 text-xs sm:text-sm font-semibold text-primary";
+      ? "rounded-[var(--radius-element)] border border-success/40 bg-[var(--color-success-muted)] px-3 py-2.5 text-xs font-semibold text-success"
+      : "rounded-[var(--radius-element)] border border-accent/40 bg-accent-muted px-3 py-2.5 text-xs font-semibold text-text-accent";
 }
 
 function updateBranchAddressPreview() {
@@ -94,9 +94,9 @@ function renderCartItems() {
     if (copyBtn) copyBtn.disabled = true;
 
     const empty = el("div", "flex flex-col items-center py-9 px-4 text-center");
-    empty.appendChild(el("h3", "mb-2 text-lg font-extrabold text-ink", i18n.t("cart.emptyTitle")));
-    empty.appendChild(el("p", "mb-6 max-w-sm text-[15px] leading-relaxed text-ink-muted", i18n.t("cart.emptyText")));
-    const link = el("a", "ui-btn ui-btn-primary px-6", i18n.t("cart.browseMenu"));
+    empty.appendChild(el("h3", "mb-1.5 text-base font-extrabold text-text-primary", i18n.t("cart.emptyTitle")));
+    empty.appendChild(el("p", "mb-5 max-w-sm text-xs sm:text-sm leading-relaxed text-text-secondary", i18n.t("cart.emptyText")));
+    const link = el("a", "ax-btn ax-btn-primary px-5", i18n.t("cart.browseMenu"));
     link.href = "../#menu";
     empty.appendChild(link);
     container.appendChild(empty);
@@ -111,18 +111,20 @@ function renderCartItems() {
   const mode = state.data ? state.data.mode : "static";
 
   items.forEach((item) => {
-    const row = el("article", "flex flex-col gap-3 py-4 first:pt-0 last:pb-0");
+    const row = el("article", "flex flex-col gap-2.5 py-3.5 first:pt-0 last:pb-0");
 
-    const topRow = el("div", "flex items-start gap-3 sm:gap-4");
-    const img = el("img", "menu-img h-[72px] w-[72px] sm:h-20 sm:w-20 shrink-0 rounded-xl bg-[#141517] object-cover");
+    const topRow = el("div", "flex items-start gap-3");
+    const thumbWrap = el("div", "ax-card-media h-16 w-16 shrink-0");
+    const img = el("img", "menu-img h-full w-full object-cover");
     img.alt = i18n.tx(item.itemName);
     bindMenuImage(img, item.menuCode, BASE_PATH, mode);
-    topRow.appendChild(img);
+    thumbWrap.appendChild(img);
+    topRow.appendChild(thumbWrap);
 
     const info = el("div", "min-w-0 flex-1");
-    info.appendChild(el("h3", "text-[15px] sm:text-base font-extrabold leading-snug text-ink break-words", i18n.tx(item.itemName)));
+    info.appendChild(el("h3", "text-xs sm:text-sm font-extrabold leading-snug text-text-primary break-words", i18n.tx(item.itemName)));
 
-    const metaParts = [`#${item.menuCode}`, i18n.tx(item.categoryName)];
+    const metaParts = [`${i18n.t("menu.codePrefix")} ${item.menuCode}`, i18n.tx(item.categoryName)];
     if (item.variantName && item.variantName !== "Regular") {
       metaParts.push(i18n.tx(item.variantName));
     }
@@ -130,11 +132,11 @@ function renderCartItems() {
       metaParts.push(i18n.t("menu.upgradeShort"));
     }
     metaParts.push(i18n.formatIDR(item.unitPrice));
-    info.appendChild(el("div", "mt-1 text-xs sm:text-sm text-ink-secondary leading-relaxed break-words", metaParts.join(" · ")));
+    info.appendChild(el("div", "mt-0.5 text-[11px] sm:text-xs text-text-secondary leading-relaxed break-words", metaParts.join(" · ")));
 
     const removeBtn = el(
       "button",
-      "inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-xl border border-border bg-surface-muted px-3.5 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors hover:border-primary-border hover:bg-primary-soft hover:text-primary cursor-pointer",
+      "ax-btn ax-btn-outline min-h-[34px] shrink-0 px-2.5 py-1 text-xs",
       i18n.t("cart.removeItem")
     );
     removeBtn.type = "button";
@@ -143,17 +145,17 @@ function renderCartItems() {
     topRow.append(info, removeBtn);
     row.appendChild(topRow);
 
-    const controls = el("div", "flex items-center justify-between gap-3 pt-0.5");
-    const stepper = el("div", "ui-stepper");
+    const controls = el("div", "flex items-center justify-between gap-3");
+    const stepper = el("div", "ax-stepper");
 
-    const dec = el("button", "ui-stepper-btn", "−");
+    const dec = el("button", "ax-stepper-dec", "−");
     dec.type = "button";
     dec.setAttribute("aria-label", "Decrease quantity");
     dec.addEventListener("click", () => cart.updateQty(item.key, -1));
 
-    const val = el("span", "ui-stepper-val", String(item.qty));
+    const val = el("span", "ax-stepper-val", String(item.qty));
 
-    const inc = el("button", "ui-stepper-btn", "+");
+    const inc = el("button", "ax-stepper-inc", "+");
     inc.type = "button";
     inc.setAttribute("aria-label", "Increase quantity");
     inc.addEventListener("click", () => cart.updateQty(item.key, 1));
@@ -161,11 +163,11 @@ function renderCartItems() {
     stepper.append(dec, val, inc);
     controls.append(
       stepper,
-      el("span", "text-base sm:text-lg font-extrabold text-ink tabular-nums", i18n.formatIDR(item.qty * item.unitPrice))
+      el("span", "text-sm sm:text-base font-extrabold text-text-accent tabular-nums", i18n.formatIDR(item.qty * item.unitPrice))
     );
     row.appendChild(controls);
 
-    const noteInput = el("input", "ui-input bg-surface-muted");
+    const noteInput = el("input", "ax-input text-xs py-2 min-h-[38px]");
     noteInput.type = "text";
     noteInput.value = item.note || "";
     noteInput.placeholder = i18n.t("cart.itemNotePlaceholder");
@@ -181,7 +183,7 @@ function renderCartItems() {
 function buildOrderMessage() {
   const branchVal = document.getElementById("branch-select").value.trim();
   const customerName = document.getElementById("customer-name").value.trim();
-  const orderTypeKey = document.querySelector('input[name="orderType"]:checked')?.value || "dineIn";
+  const orderTypeKey = document.querySelector('input[name="orderType"]:checked')?.value || "takeAway";
   const paymentKey =
     document.querySelector('input[name="paymentMethod"]:checked')?.value || "paymentCash";
   const generalNotes = document.getElementById("order-notes").value.trim();
@@ -254,7 +256,8 @@ function renderAll() {
 
 async function boot() {
   await i18n.init();
-  i18n.mountToggle(document.getElementById("lang-toggle"));
+  i18n.mountToggle("#lang-toggle");
+  i18n.mountThemeToggle("[data-theme-toggle]");
   i18n.applyStaticTranslations();
 
   document.getElementById("branch-select").addEventListener("change", updateBranchAddressPreview);

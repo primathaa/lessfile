@@ -3,40 +3,151 @@
 @source "../cart/index.html";
 @source "../js";
 
-@theme {
-  --color-primary: #FF2C2C;
-  --color-primary-hover: #DC1F1F;
-  --color-primary-soft: #FFF1F1;
-  --color-primary-border: #FFC4C4;
-  --color-background: #EBEFEE;
-  --color-surface: #FFFFFF;
-  --color-surface-muted: #F5F8F7;
-  --color-ink: #16181A;
-  --color-ink-secondary: #434B50;
-  --color-ink-muted: #5F686E;
-  --color-border: #D2DBD8;
+/* Astryx / Colors · Light */
+@theme static {
+  --color-accent: #FF2C2C;
+  --color-accent-hover: #DC1F1F;
+  --color-accent-muted: #FFF1F1;
+  --color-on-accent: #FFFFFF;
+  --color-bg-body: #F1F4F7;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-popover: #FFFFFF;
+  --color-bg-muted: #E6ECF1;
+  --color-bg-inverted: #0A1317;
+  --color-text-primary: #0A1317;
+  --color-text-secondary: #4E606F;
+  --color-text-disabled: #A4B0BC;
+  --color-text-accent: #D61F1F;
+  --color-border-default: #D2DBD8;
   --color-border-subtle: #E3EAE8;
-  --color-dark-canvas: #121416;
+  --color-success: #0D8626;
+  --color-warning: #E2A400;
+  --color-error: #AA071E;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Adapted shadcn/ui design tokens scoped to Chicken LessFille Solo */
+/* Astryx / Spacing · Default (4dp grid) */
+@theme static {
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+}
+
+/* Astryx / Shape · Concentric Radius Scale */
+@theme static {
+  --radius-none: 0px;
+  --radius-inner: 4px;
+  --radius-element: 8px;
+  --radius-container: 12px;
+  --radius-page: 28px;
+  --radius-full: 9999px;
+}
+
+/* Astryx / Typography · Geometric Scale (round(14 * 1.2^step)) */
+@theme static {
+  --font-xs: 10px;
+  --font-sm: 12px;
+  --font-base: 14px;
+  --font-lg: 17px;
+  --font-xl: 20px;
+  --font-2xl: 24px;
+  --font-3xl: 29px;
+  --font-4xl: 35px;
+  --font-5xl: 42px;
+}
+
 :root {
-  --background: #EBEFEE;
-  --foreground: #16181A;
-  --card: #FFFFFF;
-  --card-foreground: #16181A;
-  --primary: #FF2C2C;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F5F8F7;
-  --secondary-foreground: #16181A;
-  --muted: #E3EAE8;
-  --muted-foreground: #5F686E;
-  --accent: #FFF1F1;
-  --accent-foreground: #D61F1F;
-  --border: #D2DBD8;
-  --ring: #FF2C2C;
-  --radius: 0.875rem;
+  --color-accent: #FF2C2C;
+  --color-accent-hover: #DC1F1F;
+  --color-accent-muted: #FFF1F1;
+  --color-on-accent: #FFFFFF;
+  --color-bg-body: #F1F4F7;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-popover: #FFFFFF;
+  --color-bg-muted: #E6ECF1;
+  --color-bg-inverted: #0A1317;
+  --color-text-primary: #0A1317;
+  --color-text-secondary: #4E606F;
+  --color-text-disabled: #A4B0BC;
+  --color-text-accent: #D61F1F;
+  --color-border-default: #D2DBD8;
+  --color-border-subtle: #E3EAE8;
+  --color-success: #0D8626;
+  --color-warning: #E2A400;
+  --color-error: #AA071E;
+  --color-success-muted: #E7F6EC;
+  --color-warning-muted: #FEF6DF;
+  --color-hero-bg: #0A1317;
+
+  /* Astryx Elevation Stacking Order */
+  --shadow-low: 0 1px 2px rgba(10, 19, 23, 0.05), 0 2px 6px rgba(10, 19, 23, 0.03);
+  --shadow-med: 0 4px 14px rgba(10, 19, 23, 0.09);
+  --shadow-high: 0 12px 28px rgba(10, 19, 23, 0.24);
+
+  /* Astryx Motion Tokens */
+  --duration-fast: 175ms;
+  --duration-medium: 410ms;
+  --ease-standard: cubic-bezier(0.24, 1, 0.4, 1);
+
+  color-scheme: light;
+}
+
+/* Astryx / Colors · Dark */
+[data-astryx-colors="Dark"] {
+  --color-accent: #FF4D4D;
+  --color-accent-hover: #FF6B6B;
+  --color-accent-muted: #3B1518;
+  --color-on-accent: #FFFFFF;
+  --color-bg-body: #111112;
+  --color-bg-surface: #1F1F22;
+  --color-bg-card: #1F1F22;
+  --color-bg-popover: #28292C;
+  --color-bg-muted: #2A2B30;
+  --color-bg-inverted: #FFFFFF;
+  --color-text-primary: #DFE2E5;
+  --color-text-secondary: #AAAFB5;
+  --color-text-disabled: #6F747C;
+  --color-text-accent: #FF6B6B;
+  --color-border-default: #32343A;
+  --color-border-subtle: #26272C;
+  --color-success: #22C55E;
+  --color-warning: #FACC15;
+  --color-error: #E3193B;
+  --color-success-muted: #122D1F;
+  --color-warning-muted: #33280E;
+  --color-hero-bg: #261417;
+
+  --shadow-low: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-med: 0 6px 18px rgba(0, 0, 0, 0.45);
+  --shadow-high: 0 14px 32px rgba(0, 0, 0, 0.62);
+
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-astryx-colors="Dark"] {
+    --duration-fast: 0.01ms;
+    --duration-medium: 0.01ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @layer base {
@@ -44,25 +155,32 @@
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    font-size: 16px;
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--color-bg-body);
+    color: var(--color-text-primary);
     font-family: var(--font-sans);
+    font-size: var(--font-base);
+    line-height: 1.5;
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
   }
 
-  /* Ensure anchored sections never hide beneath the sticky header */
-  section[id] {
+  section[id],
+  div[id^="cat-"] {
     scroll-margin-top: 8.5rem;
   }
 
-  @media (min-width: 768px) {
-    section[id] {
-      scroll-margin-top: 5.5rem;
+  @media (min-width: 1024px) {
+    section[id],
+    div[id^="cat-"] {
+      scroll-margin-top: 5rem;
     }
   }
 
@@ -81,124 +199,364 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid var(--ring);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
 }
 
-/* Adapted shadcn/ui component primitives with >=48px mobile touch targets */
+/* Astryx Geometric Typography Triplets */
 @layer components {
-  .ui-container {
-    @apply mx-auto w-full max-w-[1200px] px-3.5 sm:px-6 lg:px-8;
+  .ax-display-1 {
+    font-size: var(--font-5xl);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
   }
 
-  .ui-card {
-    @apply rounded-2xl border border-border bg-surface text-ink shadow-[0_1px_3px_rgba(18,20,22,0.05),0_4px_12px_rgba(18,20,22,0.03)];
+  .ax-display-2 {
+    font-size: var(--font-4xl);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
   }
 
-  .ui-btn {
-    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-transparent px-5 py-2.5 text-sm font-bold leading-snug transition-colors duration-150 cursor-pointer select-none active:opacity-90 disabled:pointer-events-none disabled:opacity-45;
+  .ax-heading-1 {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -0.015em;
   }
 
-  .ui-btn-sm {
-    @apply inline-flex min-h-[48px] sm:min-h-[44px] items-center justify-center gap-1.5 rounded-full border border-transparent px-4 py-2 text-sm sm:text-xs font-extrabold leading-none transition-colors duration-150 cursor-pointer select-none active:opacity-90;
+  .ax-heading-2 {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
   }
 
-  .ui-btn-primary {
-    @apply bg-primary text-white hover:bg-primary-hover shadow-[0_2px_6px_rgba(255,44,44,0.22)];
+  .ax-heading-3 {
+    font-size: var(--font-lg);
+    font-weight: 700;
+    line-height: 1.3;
   }
 
-  .ui-btn-outline {
-    @apply border-border bg-surface text-ink hover:border-primary hover:text-primary;
+  .ax-body {
+    font-size: var(--font-base);
+    font-weight: 400;
+    line-height: 1.55;
   }
 
-  .ui-btn-outline-light {
-    @apply border-white/35 bg-white/10 text-white hover:bg-white hover:text-ink;
+  .ax-label {
+    font-size: var(--font-base);
+    font-weight: 600;
+    line-height: 1.4;
   }
 
-  .ui-btn-ghost-danger {
-    @apply min-h-[48px] sm:min-h-[44px] border-primary-border bg-primary-soft/50 px-4 py-2 text-xs sm:text-sm font-bold text-primary hover:bg-primary-soft;
+  .ax-supporting {
+    font-size: var(--font-sm);
+    font-weight: 400;
+    line-height: 1.45;
   }
 
-  .ui-badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-extrabold tracking-wide leading-none;
+  .ax-caption {
+    font-size: var(--font-xs);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
-  .ui-badge-primary {
-    @apply bg-primary text-white;
+  /* Astryx Frame-First AppShell (Desktop: 240px SideNav | 1fr Main | 340px Cart Inspector) */
+  .ax-appshell {
+    @apply min-h-screen w-full bg-bg-body lg:grid lg:grid-cols-[240px_minmax(0,1fr)_340px] lg:items-start;
   }
 
-  .ui-badge-soft {
-    @apply bg-primary-soft text-primary border border-primary-border/60;
+  .ax-sidenav {
+    @apply hidden lg:flex lg:sticky lg:top-0 lg:h-screen lg:w-[240px] lg:flex-col lg:justify-between lg:border-r lg:border-border-default lg:bg-bg-surface lg:p-4 lg:overflow-y-auto;
   }
 
-  .ui-badge-muted {
-    @apply bg-background text-ink-secondary border border-border;
+  .ax-main {
+    @apply min-w-0 flex-1 pb-28 lg:pb-12;
   }
 
-  /* 16px (text-base) on mobile prevents iOS Safari/Chrome mobile auto-zoom on focus */
-  .ui-input,
-  .ui-select,
-  .ui-textarea {
-    @apply w-full max-w-full min-w-0 rounded-xl border border-border bg-surface px-4 py-3 text-base sm:text-sm text-ink placeholder:text-ink-muted transition-colors focus:border-primary focus:outline-none;
+  .ax-inspector {
+    @apply hidden lg:flex lg:sticky lg:top-0 lg:h-screen lg:w-[340px] lg:flex-col lg:border-l lg:border-border-default lg:bg-bg-surface lg:p-5 lg:overflow-y-auto;
   }
 
-  .ui-input,
-  .ui-select {
-    @apply min-h-[48px];
+  /* Astryx Container & Card (Concentric Radius Rule: Outer 12px, Pad 12px, Inner 8px) */
+  .ax-card {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-container);
+    box-shadow: var(--shadow-low);
+    padding: 12px;
   }
 
-  /* Segmented language switcher (>=48px touch height, >=8px gap between options) */
-  .ui-lang-switch {
-    @apply inline-flex min-h-[52px] items-center rounded-full border border-border bg-background p-1 gap-2;
+  .ax-card-padded {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-container);
+    box-shadow: var(--shadow-low);
+    padding: 16px;
   }
 
-  .ui-lang-btn {
-    @apply inline-flex min-h-[44px] flex-1 sm:flex-initial items-center justify-center rounded-full px-3.5 py-2 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:text-ink;
+  .ax-card-media {
+    border-radius: var(--radius-element);
+    overflow: hidden;
+    position: relative;
+    background-color: #121417;
   }
 
-  .ui-lang-btn.is-active {
-    @apply bg-primary text-white shadow-xs;
+  /* Astryx Dense List / Item (Principle #3: edge-to-edge rows with dividers, no heavy hover transitions) */
+  .ax-list {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-container);
+    box-shadow: var(--shadow-low);
+    overflow: hidden;
   }
 
-  /* Menu category pill tabs (>=48px touch target) */
-  .ui-tab {
-    @apply inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-full border border-border bg-surface px-4 py-2.5 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors cursor-pointer whitespace-nowrap hover:border-primary hover:text-primary;
+  .ax-list-item {
+    @apply flex items-center justify-between gap-3 px-3.5 py-3 sm:px-4 sm:py-3.5 border-b border-border-subtle last:border-b-0;
   }
 
-  .ui-tab.is-active {
-    @apply border-primary bg-primary text-white shadow-[0_2px_6px_rgba(255,44,44,0.2)];
+  /* Astryx Interactive Controls (--radius-element: 8px, --duration-fast: 175ms) */
+  .ax-btn {
+    border-radius: var(--radius-element);
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      opacity var(--duration-fast) var(--ease-standard);
+    @apply inline-flex min-h-[40px] items-center justify-center gap-2 border border-transparent px-3.5 py-2 text-xs sm:text-sm font-bold leading-none cursor-pointer select-none disabled:pointer-events-none disabled:opacity-45;
   }
 
-  /* Variant toggle group (>=48px mobile touch target, 8px gap) */
-  .ui-variant-btn {
-    @apply inline-flex min-h-[48px] sm:min-h-[42px] flex-1 items-center justify-center rounded-xl border border-border bg-surface-muted px-3 py-2 text-xs sm:text-sm font-extrabold text-ink-secondary transition-colors cursor-pointer hover:border-primary/60;
+  .ax-btn-lg {
+    border-radius: var(--radius-element);
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      opacity var(--duration-fast) var(--ease-standard);
+    @apply inline-flex min-h-[46px] items-center justify-center gap-2 border border-transparent px-4 py-2.5 text-sm font-extrabold leading-none cursor-pointer select-none disabled:pointer-events-none disabled:opacity-45;
   }
 
-  .ui-variant-btn.is-active {
-    @apply border-primary bg-primary-soft text-primary shadow-2xs;
+  .ax-btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .ax-btn-primary:hover {
+    background-color: var(--color-accent-hover);
   }
 
-  /* Quantity stepper (48x48px buttons on mobile for effortless thumb tapping) */
-  .ui-stepper {
-    @apply inline-flex min-h-[48px] items-center gap-2 rounded-full border border-primary-border bg-primary-soft p-1;
+  .ax-btn-soft {
+    background-color: var(--color-accent-muted);
+    border-color: color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: var(--color-text-accent);
+  }
+  .ax-btn-soft:hover {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
   }
 
-  .ui-stepper-btn {
-    @apply inline-flex h-10 w-10 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-primary text-lg font-extrabold leading-none text-white transition-colors cursor-pointer hover:bg-primary-hover;
+  .ax-btn-muted {
+    background-color: var(--color-bg-muted);
+    color: var(--color-text-primary);
+  }
+  .ax-btn-muted:hover {
+    border-color: var(--color-border-default);
   }
 
-  .ui-stepper-val {
-    @apply min-w-[28px] text-center text-sm sm:text-base font-extrabold text-ink tabular-nums;
+  .ax-btn-outline {
+    background-color: var(--color-bg-surface);
+    border-color: var(--color-border-default);
+    color: var(--color-text-primary);
+  }
+  .ax-btn-outline:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-accent);
   }
 
-  /* Selectable radio cards (adapted shadcn RadioGroupItem, >=52px touch height) */
-  .ui-radio-card {
-    @apply flex min-h-[52px] items-center gap-3 rounded-xl border border-border bg-surface-muted px-4 py-3 text-sm font-bold text-ink transition-colors cursor-pointer hover:border-primary/60 has-[:checked]:border-primary has-[:checked]:bg-primary-soft has-[:checked]:text-primary;
+  .ax-btn-inverted {
+    background-color: var(--color-bg-inverted);
+    color: var(--color-bg-surface);
   }
 
-  .ui-radio-card input {
-    @apply h-5 w-5 shrink-0 accent-primary;
+  /* Astryx Badges & Category Pills (--radius-full: 9999px) */
+  .ax-badge {
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    @apply inline-flex items-center px-2.5 py-1 font-extrabold uppercase tracking-wider leading-none whitespace-nowrap;
+  }
+
+  .ax-badge-primary {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .ax-badge-soft {
+    background-color: var(--color-accent-muted);
+    color: var(--color-text-accent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+
+  .ax-badge-success {
+    background-color: var(--color-success-muted);
+    color: var(--color-success);
+    border: 1px solid color-mix(in srgb, var(--color-success) 30%, transparent);
+  }
+
+  .ax-badge-warning {
+    background-color: var(--color-warning-muted);
+    color: var(--color-warning);
+    border: 1px solid color-mix(in srgb, var(--color-warning) 35%, transparent);
+  }
+
+  .ax-badge-muted {
+    background-color: var(--color-bg-muted);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-default);
+  }
+
+  /* Astryx Inputs (--radius-element: 8px, 16px on mobile to prevent auto-zoom) */
+  .ax-input,
+  .ax-select,
+  .ax-textarea {
+    border-radius: var(--radius-element);
+    background-color: var(--color-bg-muted);
+    border: 1px solid var(--color-border-default);
+    color: var(--color-text-primary);
+    transition:
+      border-color var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-fast) var(--ease-standard);
+    @apply w-full max-w-full min-w-0 px-3.5 py-2.5 text-base sm:text-sm placeholder:text-text-secondary/80 focus:border-accent focus:bg-bg-surface focus:outline-none;
+  }
+
+  .ax-input,
+  .ax-select {
+    @apply min-h-[42px];
+  }
+
+  /* Astryx Segmented Controls (Category Tabs, Take-Away/Dine-In, Variant Pills, Language Switch) */
+  .ax-segmented {
+    border-radius: var(--radius-element);
+    background-color: var(--color-bg-muted);
+    border: 1px solid var(--color-border-default);
+    @apply inline-flex items-center p-1 gap-1;
+  }
+
+  .ax-segmented-btn {
+    border-radius: 6px;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+    @apply inline-flex min-h-[34px] flex-1 items-center justify-center px-2.5 py-1 text-xs font-bold text-text-secondary cursor-pointer whitespace-nowrap hover:text-text-primary;
+  }
+
+  .ax-segmented-btn.is-active {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-accent);
+    box-shadow: var(--shadow-low);
+  }
+
+  /* Mobile Category Pill Strip */
+  .ax-pill-tab {
+    border-radius: var(--radius-full);
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+    @apply inline-flex min-h-[38px] shrink-0 items-center justify-center border border-border-default bg-bg-surface px-3.5 py-1.5 text-xs font-extrabold text-text-secondary cursor-pointer whitespace-nowrap hover:border-accent hover:text-text-accent;
+  }
+
+  .ax-pill-tab.is-active {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  /* Left SideNav Item */
+  .ax-nav-item {
+    border-radius: var(--radius-element);
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+    @apply flex w-full min-h-[38px] items-center justify-between px-3 py-2 text-left text-xs font-semibold text-text-secondary cursor-pointer hover:bg-bg-muted hover:text-text-primary;
+  }
+
+  .ax-nav-item.is-active {
+    background-color: var(--color-accent-muted);
+    color: var(--color-text-accent);
+    @apply font-extrabold;
+  }
+
+  /* Astryx Quantity Stepper (02-components-astryx.png spec) */
+  .ax-stepper {
+    border-radius: var(--radius-element);
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    @apply inline-flex items-center gap-1.5 p-1;
+  }
+
+  .ax-stepper-dec {
+    border-radius: 6px;
+    background-color: var(--color-bg-muted);
+    color: var(--color-text-primary);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+    @apply inline-flex h-7 w-7 items-center justify-center text-sm font-extrabold leading-none cursor-pointer hover:bg-border-default;
+  }
+
+  .ax-stepper-inc {
+    border-radius: 6px;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+    @apply inline-flex h-7 w-7 items-center justify-center text-sm font-extrabold leading-none cursor-pointer hover:bg-accent-hover;
+  }
+
+  .ax-stepper-val {
+    @apply min-w-[20px] text-center text-xs sm:text-sm font-extrabold text-text-primary tabular-nums;
+  }
+
+  /* Astryx Floating Cart Bar (Elevation: --shadow-high) */
+  .ax-floating-bar {
+    border-radius: var(--radius-container);
+    box-shadow: var(--shadow-high);
+    background-color: #0A1317;
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition:
+      transform var(--duration-medium) var(--ease-standard),
+      opacity var(--duration-medium) var(--ease-standard);
+  }
+
+  [data-astryx-colors="Dark"] .ax-floating-bar {
+    background-color: var(--color-bg-popover);
+    border-color: var(--color-border-default);
+  }
+
+  /* Hero Promo Banner surface */
+  .ax-hero-card {
+    border-radius: var(--radius-container);
+    background-color: var(--color-hero-bg);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-med);
+  }
+
+  /* Selectable Radio Card for /cart page */
+  .ax-radio-card {
+    border-radius: var(--radius-element);
+    border: 1px solid var(--color-border-default);
+    background-color: var(--color-bg-muted);
+    color: var(--color-text-primary);
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+    @apply flex min-h-[46px] items-center gap-2.5 px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer has-[:checked]:border-accent has-[:checked]:bg-accent-muted has-[:checked]:text-text-accent;
+  }
+
+  .ax-radio-card input {
+    @apply h-4 w-4 shrink-0 accent-accent;
   }
 
   .no-scrollbar {
