@@ -380,11 +380,11 @@
     color: var(--color-bg-surface);
   }
 
-  /* Astryx Badges & Category Pills (--radius-full: 9999px) */
+  /* Astryx Badges & Category Pills (--radius-full: 9999px, wrap-safe inside narrow cards) */
   .ax-badge {
     border-radius: var(--radius-full);
     font-size: var(--font-xs);
-    @apply inline-flex items-center px-2.5 py-1 font-extrabold uppercase tracking-wider leading-none whitespace-nowrap;
+    @apply inline-flex max-w-full items-center px-2.5 py-1 font-extrabold uppercase tracking-wider leading-snug break-words;
   }
 
   .ax-badge-primary {

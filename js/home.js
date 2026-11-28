@@ -637,22 +637,22 @@ function renderBusinessSection() {
   const { business } = state.data;
   container.innerHTML = "";
 
-  const historyCard = el("article", "ax-card-padded lg:col-span-7");
+  const historyCard = el("article", "ax-card-padded min-w-0 lg:col-span-12");
   historyCard.appendChild(el("h3", "mb-2 text-sm sm:text-base font-extrabold text-text-primary", i18n.t("business.historyTitle")));
   historyCard.appendChild(el("p", "text-xs sm:text-sm leading-relaxed text-text-secondary", i18n.tx(business.profile_history)));
 
   if (business.packages.length > 0) {
-    const pkgWrap = el("div", "mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2");
+    const pkgWrap = el("div", "mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2");
     business.packages.forEach((pkg) => {
-      const box = el("div", "rounded-[var(--radius-element)] border border-border-default bg-bg-muted p-3.5");
-      const head = el("div", "mb-2 flex flex-wrap items-baseline justify-between gap-2");
+      const box = el("div", "min-w-0 overflow-hidden rounded-[var(--radius-element)] border border-border-default bg-bg-muted p-4");
+      const head = el("div", "mb-2.5 flex flex-col items-start gap-1.5");
       head.appendChild(el("h4", "text-xs sm:text-sm font-extrabold text-text-primary", i18n.tx(pkg.name)));
       if (pkg.starting_price_note) {
         head.appendChild(el("span", "ax-badge ax-badge-soft", i18n.tx(pkg.starting_price_note)));
       }
       box.appendChild(head);
       const list = el("ul", "list-disc space-y-1.5 pl-4 text-xs leading-relaxed text-text-secondary");
-      pkg.features.forEach((feat) => list.appendChild(el("li", "", i18n.tx(feat))));
+      pkg.features.forEach((feat) => list.appendChild(el("li", "break-words", i18n.tx(feat))));
       box.appendChild(list);
       pkgWrap.appendChild(box);
     });
@@ -660,10 +660,10 @@ function renderBusinessSection() {
   }
   container.appendChild(historyCard);
 
-  const expCard = el("article", "ax-card-padded lg:col-span-5");
+  const expCard = el("article", "ax-card-padded min-w-0 lg:col-span-6");
   expCard.appendChild(el("h3", "mb-2 text-sm sm:text-base font-extrabold text-text-primary", i18n.t("business.experienceTitle")));
   const expList = el("ul", "list-disc space-y-2 pl-4 text-xs sm:text-sm leading-relaxed text-text-secondary");
-  business.dining_experience.forEach((line) => expList.appendChild(el("li", "", i18n.tx(line))));
+  business.dining_experience.forEach((line) => expList.appendChild(el("li", "break-words", i18n.tx(line))));
   expCard.appendChild(expList);
 
   if (business.sauces.length > 0) {
@@ -681,16 +681,16 @@ function renderBusinessSection() {
   container.appendChild(expCard);
 
   if (business.additional_notes.length > 0) {
-    const notesCard = el("article", "ax-card-padded lg:col-span-6");
+    const notesCard = el("article", "ax-card-padded min-w-0 lg:col-span-6");
     notesCard.appendChild(el("h3", "mb-2 text-sm sm:text-base font-extrabold text-text-primary", i18n.t("business.notesTitle")));
     const notesList = el("ul", "list-disc space-y-2 pl-4 text-xs sm:text-sm leading-relaxed text-text-secondary");
-    business.additional_notes.forEach((note) => notesList.appendChild(el("li", "", i18n.tx(note))));
+    business.additional_notes.forEach((note) => notesList.appendChild(el("li", "break-words", i18n.tx(note))));
     notesCard.appendChild(notesList);
     container.appendChild(notesCard);
   }
 
   if (business.summary) {
-    const sumCard = el("article", "ax-hero-card p-4 sm:p-5 lg:col-span-6");
+    const sumCard = el("article", "ax-hero-card min-w-0 p-4 sm:p-5 lg:col-span-12");
     sumCard.appendChild(el("h3", "mb-2 text-sm sm:text-base font-extrabold text-white", i18n.t("business.summaryTitle")));
     sumCard.appendChild(el("p", "text-xs sm:text-sm leading-relaxed text-[#DDE4E2]", i18n.tx(business.summary)));
     container.appendChild(sumCard);
