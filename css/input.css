@@ -174,7 +174,7 @@
 
   section[id],
   div[id^="cat-"] {
-    scroll-margin-top: 8.5rem;
+    scroll-margin-top: 4.25rem;
   }
 
   @media (min-width: 1024px) {
@@ -557,6 +557,63 @@
 
   .ax-radio-card input {
     @apply h-4 w-4 shrink-0 accent-accent;
+  }
+
+  /* Astryx Mobile Bottom Navigation Bar (Elevated Active Circle + Cutout Halo) */
+  .ax-bnav-wrap {
+    @apply pointer-events-none fixed inset-x-0 bottom-0 z-50 px-3 pt-5 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:hidden;
+  }
+
+  .ax-bnav {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 20px;
+    box-shadow: var(--shadow-high);
+    @apply pointer-events-auto relative mx-auto grid max-w-md grid-cols-5 items-end px-1.5 pt-1.5 pb-2;
+  }
+
+  .ax-bnav-item {
+    @apply relative flex flex-col items-center justify-end gap-0.5 py-0.5 text-text-secondary select-none cursor-pointer;
+  }
+
+  .ax-bnav-icon {
+    transition:
+      transform var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
+    @apply relative inline-flex h-8 w-8 items-center justify-center rounded-full text-text-secondary;
+  }
+
+  .ax-bnav-item.is-active .ax-bnav-icon {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    transform: translateY(-15px);
+    box-shadow:
+      0 0 0 6px var(--color-bg-body),
+      0 6px 14px rgba(255, 44, 44, 0.32);
+    @apply h-11 w-11;
+  }
+
+  .ax-bnav-label {
+    transition: color var(--duration-fast) var(--ease-standard);
+    @apply text-[10px] font-semibold leading-tight text-text-secondary;
+  }
+
+  .ax-bnav-item.is-active .ax-bnav-label {
+    color: var(--color-text-primary);
+    @apply font-extrabold -mt-1.5;
+  }
+
+  .ax-bnav-badge {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    @apply absolute -top-1 -right-1.5 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full px-1 text-[9px] font-extrabold leading-none tabular-nums shadow-2xs;
+  }
+
+  .ax-bnav-item.is-active .ax-bnav-badge {
+    background-color: var(--color-bg-inverted);
+    color: var(--color-bg-surface);
   }
 
   .no-scrollbar {

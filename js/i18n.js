@@ -141,14 +141,16 @@ export class I18n {
         box.setAttribute("aria-label", this.t("lang.label"));
 
         const options = [
-          { code: "id", label: this.t("lang.id") },
-          { code: "en", label: this.t("lang.en") },
+          { code: "id", label: this.t("lang.shortId"), fullLabel: this.t("lang.id") },
+          { code: "en", label: this.t("lang.shortEn"), fullLabel: this.t("lang.en") },
         ];
         options.forEach((opt) => {
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = `ax-segmented-btn${this.lang === opt.code ? " is-active" : ""}`;
           btn.setAttribute("aria-pressed", String(this.lang === opt.code));
+          btn.setAttribute("aria-label", opt.fullLabel);
+          btn.setAttribute("title", opt.fullLabel);
           btn.textContent = opt.label;
           btn.addEventListener("click", () => this.setLang(opt.code));
           box.appendChild(btn);
@@ -164,8 +166,13 @@ export class I18n {
     document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
       btn.setAttribute("aria-pressed", String(isDark));
       btn.setAttribute("aria-label", this.t("theme.toggleAria"));
+      const isCompact = btn.hasAttribute("data-theme-compact");
       const labelEl = btn.querySelector("[data-theme-label]") || btn;
-      labelEl.textContent = isDark ? this.t("theme.dark") : this.t("theme.light");
+      if (isCompact) {
+        labelEl.textContent = isDark ? this.t("theme.shortDark") : this.t("theme.shortLight");
+      } else {
+        labelEl.textContent = isDark ? this.t("theme.dark") : this.t("theme.light");
+      }
     });
   }
 

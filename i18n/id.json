@@ -9,15 +9,18 @@
     "id": "Bahasa Indonesia",
     "en": "English",
     "shortId": "ID",
-    "shortEn": "EN"
+    "shortEn": "ENG"
   },
   "theme": {
     "toggleAria": "Ganti mode warna terang atau gelap",
     "light": "Light Mode",
-    "dark": "Dark Mode"
+    "dark": "Dark Mode",
+    "shortLight": "Light",
+    "shortDark": "Dark"
   },
   "nav": {
     "menu": "Menu",
+    "promo": "Paket",
     "about": "Profil",
     "branches": "Cabang",
     "contact": "Kontak",

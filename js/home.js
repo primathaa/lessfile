@@ -470,7 +470,9 @@ function renderMenu() {
       state.activeCategory = "all";
       state.searchQuery = "";
       const searchEl = document.getElementById("menu-search");
+      const searchMobEl = document.getElementById("menu-search-mobile");
       if (searchEl) searchEl.value = "";
+      if (searchMobEl) searchMobEl.value = "";
       renderCategoryNavigation();
       renderMenu();
     });
@@ -505,6 +507,12 @@ function updateCartChrome() {
 
   const badge = document.getElementById("header-cart-badge");
   if (badge) badge.textContent = String(totalItems);
+
+  const bnavBadge = document.getElementById("bottom-nav-cart-badge");
+  if (bnavBadge) {
+    bnavBadge.textContent = String(totalItems);
+    bnavBadge.hidden = totalItems <= 0;
+  }
 
   // Mobile floating cart bar
   const floatWrap = document.getElementById("floating-cart");
@@ -798,10 +806,56 @@ async function boot() {
   i18n.applyStaticTranslations();
 
   const searchInput = document.getElementById("menu-search");
+  const searchMobileInput = document.getElementById("menu-search-mobile");
+
+  const handleSearch = (val, sourceEl) => {
+    state.searchQuery = val;
+    if (searchInput && sourceEl !== searchInput) searchInput.value = val;
+    if (searchMobileInput && sourceEl !== searchMobileInput) searchMobileInput.value = val;
+    renderMenu();
+  };
+
   if (searchInput) {
-    searchInput.addEventListener("input", (event) => {
-      state.searchQuery = event.target.value;
-      renderMenu();
+    searchInput.addEventListener("input", (event) => handleSearch(event.target.value, searchInput));
+  }
+  if (searchMobileInput) {
+    searchMobileInput.addEventListener("input", (event) =>
+      handleSearch(event.target.value, searchMobileInput)
+    );
+  }
+
+  // Mobile Bottom Navigation Bar active state (click + scroll spy)
+  const bnavItems = Array.from(document.querySelectorAll("#mobile-bottom-nav [data-bnav-target]"));
+  const setActiveBnav = (targetId) => {
+    bnavItems.forEach((item) => {
+      const match = item.getAttribute("data-bnav-target") === targetId;
+      item.classList.toggle("is-active", match);
+    });
+  };
+
+  bnavItems.forEach((item) => {
+    const targetId = item.getAttribute("data-bnav-target");
+    if (targetId && targetId !== "cart") {
+      item.addEventListener("click", () => setActiveBnav(targetId));
+    }
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observedIds = ["menu", "hero-promo", "branches", "about"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveBnav(entry.target.id);
+            break;
+          }
+        }
+      },
+      { rootMargin: "-25% 0px -60% 0px", threshold: 0.01 }
+    );
+    observedIds.forEach((id) => {
+      const sec = document.getElementById(id);
+      if (sec) observer.observe(sec);
     });
   }
 

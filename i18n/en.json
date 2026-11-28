@@ -9,16 +9,19 @@
     "id": "Bahasa Indonesia",
     "en": "English",
     "shortId": "ID",
-    "shortEn": "EN"
+    "shortEn": "ENG"
   },
   "theme": {
     "toggleAria": "Toggle light or dark color theme",
     "light": "Light Mode",
-    "dark": "Dark Mode"
+    "dark": "Dark Mode",
+    "shortLight": "Light",
+    "shortDark": "Dark"
   },
   "nav": {
     "menu": "Menu",
-    "about": "About",
+    "promo": "Deals",
+    "about": "Profile",
     "branches": "Branches",
     "contact": "Contact",
     "cart": "Cart",
